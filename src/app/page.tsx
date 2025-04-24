@@ -9,6 +9,7 @@ export default function Home() {
         <PostCard key={uuidv4()} />
       ))}
       <p>a</p>
+      <h1>test</h1>
       <PostCard />
     </MainLayout>
   );
