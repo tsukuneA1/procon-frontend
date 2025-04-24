@@ -1,21 +1,22 @@
 name: ESLint
 
-on: [pull_request]
+on:
+  pull_request:
+    branches: [main]
 
 jobs:
-  eslint:
-    name: eslint
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: npm install
-        run: npm install
-      - name: eslint review
-        uses: reviewdog/action-eslint@v1
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          eslint_flags: './**/*.{ts, tsx, js, jsx}'
-          fail_on_error: 'true'
-      - name: eslint
+          node-version: "20" # or your project Node version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
         run: npm run lint
