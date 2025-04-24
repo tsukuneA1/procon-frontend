@@ -2,7 +2,12 @@ import { notFound } from "next/navigation"
 import { Post } from "@/types/post"
 import { PostDetail } from "@/components/post-detail"
 
-// 仮のデータ取得関数
+type PageProps = {
+  params: {
+    id: string
+  }
+}
+
 async function getPostById(id: string): Promise<Post | null> {
   if (id === "1") {
     return {
@@ -20,7 +25,7 @@ async function getPostById(id: string): Promise<Post | null> {
   return null
 }
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage({ params }: PageProps) {
   const post = await getPostById(params.id)
   if (!post) return notFound()
 
