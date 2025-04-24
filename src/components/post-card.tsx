@@ -10,9 +10,9 @@ export const PostCard = () => {
       <Card className='max-w-2xl rounded-none p-4'>
         <div className='gap-4'>
 
-            
+
           <div className='flex flex-1 flex-col'>
-            <CardHeader className='flex items-center p-0 pb-2 font-semibold text-sm'>
+            <CardHeader className='flex  p-0 pb-2 font-semibold text-sm items-center'>
               <Avatar>
                 <AvatarImage src='/global.svg' />
                 <AvatarFallback>U</AvatarFallback>
