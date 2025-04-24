@@ -1,12 +1,16 @@
 pre-push:
   commands:
-    packages-audit:
-      tags: frontend security
-      run: npm audit
+    abort-on-main:
+      run: ./scripts/pre-push-check.sh
 
 pre-commit:
   parallel: true
+  jobs:
+    - name: biome
+      run: pnpm run lint
+
+post-merge:
   commands:
-    biome:
-      glob: "src/**/*.{js,ts,jsx,tsx}"
-      run: npx @biomejs/biome check --write {staged_files}
+    npm:
+      glob: "{package.json}"
+      run: npm install
