@@ -1,6 +1,8 @@
 name: ESLint
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -13,10 +15,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # or your project Node version
+          node-version: '20' # ここはプロジェクトに合わせて
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install # npm の場合は npm install に
 
       - name: Run ESLint
-        run: npm run lint
+        run: pnpm run lint # npm なら npm run lint
