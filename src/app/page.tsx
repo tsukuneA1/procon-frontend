@@ -1,13 +1,14 @@
-import { PostCard } from "@/components/post-card";
-import { MainLayout } from "@/layouts/main/layout";
+import { PostCard } from '@/components/post-card';
+import { MainLayout } from '@/layouts/main/layout';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Home() {
   return (
-      <MainLayout>
-        {Array.from({ length: 10 }).map((_, index) => 
-          <PostCard key={index}/>
-        )}
-        <PostCard/>
-      </MainLayout>
+    <MainLayout>
+      {Array.from({ length: 10 }).map(() => (
+        <PostCard key={uuidv4()} />
+      ))}
+      <PostCard />
+    </MainLayout>
   );
 }
