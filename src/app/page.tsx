@@ -8,7 +8,7 @@ export default function Home() {
       {Array.from({ length: 10 }).map(() => (
         <PostCard key={uuidv4()} />
       ))}
-      <p>a</p>
+      <p>test</p>
       <PostCard />
     </MainLayout>
   );
