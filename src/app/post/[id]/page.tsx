@@ -1,18 +1,16 @@
 import { notFound } from "next/navigation"
-import { Post } from "@/types/post"
 import { PostDetail } from "@/components/post-detail"
+import { Post } from "@/types/post"
 
-type PageProps = {
-  params: {
-    id: string
-  }
+type PostPageProps = {
+  params: { id: string }
 }
 
 async function getPostById(id: string): Promise<Post | null> {
   if (id === "1") {
     return {
       id: "1",
-      content: "これはサンプルポストです。",
+      content: "これはサンプル投稿です",
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       author: {
@@ -25,9 +23,10 @@ async function getPostById(id: string): Promise<Post | null> {
   return null
 }
 
-export default async function PostPage({ params }: PageProps) {
+export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostById(params.id)
   if (!post) return notFound()
 
   return <PostDetail post={post} />
 }
+
