@@ -1,28 +1,28 @@
-name: ESLint
+name: Lint Check
 
 on:
   push:
-    branches: 
+    branches:
       - main
       - experiment
   pull_request:
-    branches: 
-      - main
-      - experiment
+    - main
+    - experiment
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # ここはプロジェクトに合わせて
-
+          node-version: "20"
       - name: Install dependencies
-        run: pnpm install # npm の場合は npm install に
+        run: npm install
 
-      - name: Run ESLint
-        run: pnpm run lint # npm なら npm run lint
+      - name: Run Lint
+        run: npm run lint
