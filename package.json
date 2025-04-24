@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "biome check . && eslint .",
     "lint:fix": "biome check . --write --unsafe && eslint . --fix",
     "format": "biome format ./src/**/* --write",
     "check": "biome check --apply ./src/**/*"
@@ -20,7 +20,8 @@
     "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwind-merge": "^3.2.0"
+    "tailwind-merge": "^3.2.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

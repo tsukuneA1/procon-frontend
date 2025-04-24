@@ -7,7 +7,7 @@ pre-commit:
   parallel: true
   jobs:
     - name: biome
-      run: pnpm run lint
+      run: npm run lint
 
 post-merge:
   commands:
