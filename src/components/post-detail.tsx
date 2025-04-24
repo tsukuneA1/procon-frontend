@@ -1,69 +1,75 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Post } from "@/types/post"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Reply } from "@/types/reply"
+import { useState } from 'react';
+import type { Post } from '@/types/post';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import type { Reply } from '@/types/reply';
 
 export const PostDetail = ({ post }: { post: Post }) => {
-  const [replies, setReplies] = useState<Reply[]>([])
-  const [replyText, setReplyText] = useState("")
+  const [replies, setReplies] = useState<Reply[]>([]);
+  const [replyText, setReplyText] = useState('');
 
   const handleReply = () => {
-    if (!replyText.trim()) return
+    if (!replyText.trim()) return;
     const newReply: Reply = {
       id: `${Date.now()}`,
       content: replyText,
       createdAt: new Date().toISOString(),
       author: {
-        name: "you",
-        image: "/vercel.svg",
+        name: 'you',
+        image: '/vercel.svg',
       },
-    }
-    setReplies([newReply, ...replies])
-    setReplyText("")
-  }
+    };
+    setReplies([newReply, ...replies]);
+    setReplyText('');
+  };
 
   return (
-    <div className="max-w-2xl mx-auto p-4 space-y-6">
-      <div className="flex gap-4 items-start">
+    <div className='mx-auto max-w-2xl space-y-6 p-4'>
+      <div className='flex gap-4 items-start '>
         <Avatar>
           <AvatarImage src={post.author.image} />
           <AvatarFallback>{post.author.name[0].toUpperCase()}</AvatarFallback>
         </Avatar>
         <div>
-          <div className="font-semibold text-zinc-800 dark:text-zinc-100">@{post.author.name}</div>
-          <p className="mt-1 text-base text-zinc-900 dark:text-zinc-200 whitespace-pre-wrap">
+          <div className='font-semibold text-zinc-800 dark:text-zinc-100'>
+            @{post.author.name}
+          </div>
+          <p className='mt-1 whitespace-pre-wrap text-base text-zinc-900 dark:text-zinc-200'>
             {post.content}
           </p>
-          <div className="mt-2 text-sm text-zinc-500">
+          <div className='mt-2 text-sm text-zinc-500'>
             {new Date(post.createdAt).toLocaleString()}
           </div>
         </div>
       </div>
 
-      <div className="flex gap-2">
+      <div className='flex gap-2'>
         <Input
-          placeholder="リプライを書く..."
+          placeholder='リプライを書く...'
           value={replyText}
           onChange={(e) => setReplyText(e.target.value)}
         />
         <Button onClick={handleReply}>返信</Button>
       </div>
 
-      <div className="space-y-4">
+      <div className='space-y-4'>
         {replies.map((reply) => (
-          <div key={reply.id} className="flex gap-3 items-start">
+          <div key={reply.id} className='flex items-start gap-3'>
             <Avatar>
               <AvatarImage src={reply.author.image} />
-              <AvatarFallback>{reply.author.name[0].toUpperCase()}</AvatarFallback>
+              <AvatarFallback>
+                {reply.author.name[0].toUpperCase()}
+              </AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-semibold">@{reply.author.name}</div>
-              <p className="text-zinc-800 dark:text-zinc-100">{reply.content}</p>
-              <div className="text-sm text-zinc-500">
+              <div className='font-semibold'>@{reply.author.name}</div>
+              <p className='text-zinc-800 dark:text-zinc-100'>
+                {reply.content}
+              </p>
+              <div className='text-sm text-zinc-500'>
                 {new Date(reply.createdAt).toLocaleString()}
               </div>
             </div>
@@ -71,5 +77,5 @@ export const PostDetail = ({ post }: { post: Post }) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
