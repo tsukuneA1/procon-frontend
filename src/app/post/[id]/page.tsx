@@ -2,10 +2,6 @@ import { notFound } from "next/navigation"
 import { PostDetail } from "@/components/post-detail"
 import { Post } from "@/types/post"
 
-type PostPageProps = {
-  params: { id: string }
-}
-
 async function getPostById(id: string): Promise<Post | null> {
   if (id === "1") {
     return {
@@ -23,7 +19,7 @@ async function getPostById(id: string): Promise<Post | null> {
   return null
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+export default async function PostPage({ params }: { params: { id: string } }) {
   const post = await getPostById(params.id)
   if (!post) return notFound()
 
