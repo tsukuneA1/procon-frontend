@@ -28,7 +28,7 @@ export const PostDetail = ({ post }: { post: Post }) => {
 
   return (
     <div className='mx-auto max-w-2xl space-y-6 p-4'>
-      <div className='flex gap-4 items-start '>
+      <div className='flex items-start gap-4 '>
         <Avatar>
           <AvatarImage src={post.author.image} />
           <AvatarFallback>{post.author.name[0].toUpperCase()}</AvatarFallback>
