@@ -6,7 +6,7 @@ export default function Home() {
       <MainLayout>
         {Array.from({ length: 10 }).map((_, index) => 
           <PostCard key={index}/>
-        )}
+              )}
         <PostCard/>
       </MainLayout>
   );
