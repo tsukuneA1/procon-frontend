@@ -19,10 +19,13 @@ async function getPostById(id: string): Promise<Post | null> {
   return null
 }
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: { id: string }
+}) {
   const post = await getPostById(params.id)
   if (!post) return notFound()
 
   return <PostDetail post={post} />
 }
-
