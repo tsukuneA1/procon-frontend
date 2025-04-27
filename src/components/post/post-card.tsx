@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader } from './ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Button } from './ui/button';
+import { Card, CardContent, CardHeader } from '../ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Button } from '../ui/button';
 import { MessageCircle, Heart, Repeat2 } from 'lucide-react';
 import Link from 'next/link';
 
