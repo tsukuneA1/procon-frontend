@@ -8,6 +8,6 @@ export type Post = {
   user: {
     id: number;
     name: string;
-    email: string;
+    image: string;
   };
 };
