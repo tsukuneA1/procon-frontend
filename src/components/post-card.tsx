@@ -8,12 +8,12 @@ import type { Post } from '@/types/post';
 export const PostCard = ({ post }: { post: Post }) => {
   return (
     <Link href={`/post/${post.id}`}>
-      <Card className='max-w-2xl rounded-none p-4'>
+      <Card className='w-2xl rounded-none p-4'>
         <div className='gap-4'>
           <div className='flex flex-1 flex-col'>
             <CardHeader className='flex items-center p-0 pb-2 font-semibold text-sm'>
               <Avatar>
-                <AvatarImage src='/sample.png' />
+                <AvatarImage src={post.user.image} />
                 <AvatarFallback>U</AvatarFallback>
               </Avatar>
               <span>{post.user.name}</span>

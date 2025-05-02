@@ -30,7 +30,7 @@ export const PostDetail = ({ post }: { post: Post }) => {
     <div className='mx-auto max-w-2xl space-y-6 p-4'>
       <div className='flex items-start gap-4 '>
         <Avatar>
-          <AvatarImage src='/sample.png' />
+          <AvatarImage src={post.user.image} />
           <AvatarFallback>{post.user.name[0].toUpperCase()}</AvatarFallback>
         </Avatar>
         <div>
