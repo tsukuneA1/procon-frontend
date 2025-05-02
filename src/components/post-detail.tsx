@@ -30,12 +30,12 @@ export const PostDetail = ({ post }: { post: Post }) => {
     <div className='mx-auto max-w-2xl space-y-6 p-4'>
       <div className='flex items-start gap-4 '>
         <Avatar>
-          <AvatarImage src={post.author.image} />
-          <AvatarFallback>{post.author.name[0].toUpperCase()}</AvatarFallback>
+          <AvatarImage src='/sample.png' />
+          <AvatarFallback>{post.user.name[0].toUpperCase()}</AvatarFallback>
         </Avatar>
         <div>
           <div className='font-semibold text-zinc-800 dark:text-zinc-100'>
-            @{post.author.name}
+            @{post.user.name}
           </div>
           <p className='mt-1 whitespace-pre-wrap text-base text-zinc-900 dark:text-zinc-200'>
             {post.content}

@@ -1,13 +1,13 @@
-import type { Reply } from './reply';
-
 export type Post = {
   id: string;
   content: string;
   createdAt: string;
   updatedAt: string;
-  author: {
+  user_id: number;
+  status: string;
+  user: {
+    id: number;
     name: string;
-    image: string;
+    email: string;
   };
-  replies: Reply[];
 };

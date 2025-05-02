@@ -3,23 +3,23 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { MessageCircle, Heart, Repeat2 } from 'lucide-react';
 import Link from 'next/link';
+import type { Post } from '@/types/post';
 
-export const PostCard = () => {
+export const PostCard = ({ post }: { post: Post }) => {
   return (
-    <Link href={'/post/1'}>
+    <Link href={`/post/${post.id}`}>
       <Card className='max-w-2xl rounded-none p-4'>
         <div className='gap-4'>
           <div className='flex flex-1 flex-col'>
             <CardHeader className='flex items-center p-0 pb-2 font-semibold text-sm'>
               <Avatar>
-                <AvatarImage src='/global.svg' />
+                <AvatarImage src='/sample.png' />
                 <AvatarFallback>U</AvatarFallback>
               </Avatar>
-              <span>@username</span>
+              <span>{post.user.name}</span>
             </CardHeader>
             <CardContent className='p-0 text-base text-zinc-800 dark:text-zinc-200'>
-              test test test test test test test test test test test test test
-              test test
+              {post.content}
             </CardContent>
             <div className='mt-3 flex gap-4 text-sm text-zinc-500'>
               <Button
