@@ -1,8 +1,8 @@
 export type Post = {
   id: string;
   content: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
   user_id: number;
   status: string;
   user: {
