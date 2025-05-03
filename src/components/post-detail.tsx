@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import type { Reply } from '@/types/reply';
+import Link from 'next/link';
 
 export const PostDetail = ({ post }: { post: Post }) => {
   const [replies, setReplies] = useState<Reply[]>([]);
@@ -34,14 +35,17 @@ export const PostDetail = ({ post }: { post: Post }) => {
           <AvatarFallback>{post.user.name[0].toUpperCase()}</AvatarFallback>
         </Avatar>
         <div>
-          <div className='font-semibold text-zinc-800 dark:text-zinc-100'>
-            @{post.user.name}
-          </div>
+          <Link href={`../users/${post.user_id}`}>
+            <div className='font-semibold text-zinc-800 dark:text-zinc-100'>
+              @{post.user.name}
+            </div>
+          </Link>
+
           <p className='mt-1 whitespace-pre-wrap text-base text-zinc-900 dark:text-zinc-200'>
             {post.content}
           </p>
           <div className='mt-2 text-sm text-zinc-500'>
-            {new Date(post.createdAt).toLocaleString()}
+            {new Date(post.created_at).toLocaleString()}
           </div>
         </div>
       </div>
