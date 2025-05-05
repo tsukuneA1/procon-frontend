@@ -14,7 +14,7 @@ import type { Post } from '@/types/post';
 
 export const PostCard = ({ post }: { post: Post }) => {
   return (
-    <Card className='w-2xl rounded-none p-4'>
+    <Card className='w-2xl rounded-none p-4 pb-2'>
       <div className='flex gap-4'>
         <Link href={`/users/${post.user_id}`}>
           <Avatar className='top-2px border-1 border-gray-300'>
