@@ -4,6 +4,13 @@ import { Button } from './ui/button';
 import { MessageCircle, Heart, Repeat2 } from 'lucide-react';
 import Link from 'next/link';
 import type { Post } from '@/types/post';
+import { formatDistanceToNow } from 'date-fns';
+import { ja } from 'date-fns/locale';
+
+export function timeAgo(dateString: string) {
+  const date = new Date(dateString);
+  return formatDistanceToNow(date, { addSuffix: true, locale: ja });
+}
 
 export const PostCard = ({ post }: { post: Post }) => {
   return (
@@ -17,9 +24,10 @@ export const PostCard = ({ post }: { post: Post }) => {
                 <AvatarFallback>U</AvatarFallback>
               </Avatar>
               <span>{post.user.name}</span>
+              <span>{timeAgo(post.created_at)}</span>
             </CardHeader>
           </Link>
-          <Link href={`/post/${post.id}`}>
+          <Link href={`/posts/${post.id}`}>
             <CardContent className='p-0 text-base text-zinc-800 dark:text-zinc-200'>
               {post.content}
             </CardContent>

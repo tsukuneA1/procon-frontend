@@ -37,7 +37,7 @@ export const PostDetail = ({ post }: { post: Post }) => {
         <div>
           <Link href={`../users/${post.user_id}`}>
             <div className='font-semibold text-zinc-800 dark:text-zinc-100'>
-              @{post.user.name}
+              {post.user.name}
             </div>
           </Link>
 
