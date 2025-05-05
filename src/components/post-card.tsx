@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader } from './ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
+import { getTimeDistance } from '../lib/utils';
 import { MessageCircle, Heart, Repeat2 } from 'lucide-react';
 import Link from 'next/link';
 import type { Post } from '@/types/post';
@@ -8,17 +9,22 @@ import type { Post } from '@/types/post';
 export const PostCard = ({ post }: { post: Post }) => {
   return (
     <Card className='w-2xl rounded-none p-4'>
-      <div className='gap-4'>
+      <div className='flex gap-4'>
+        <Link href={`/users/${post.user_id}`}>
+          <Avatar className='top-2px border-1 border-gray-300'>
+            <AvatarImage src={post.user.image} />
+            <AvatarFallback>U</AvatarFallback>
+          </Avatar>
+        </Link>
         <div className='flex flex-1 flex-col'>
-          <Link href={`/users/${post.user_id}`}>
-            <CardHeader className='flex items-center p-0 pb-2 font-semibold text-sm'>
-              <Avatar>
-                <AvatarImage src={post.user.image} />
-                <AvatarFallback>U</AvatarFallback>
-              </Avatar>
-              <span>{post.user.name}</span>
-            </CardHeader>
-          </Link>
+          <CardHeader className='flex items-end p-0 pb-0.5'>
+            <Link href={`/users/${post.user_id}`}>
+              <span className='font-semibold text-sm'>{post.user.name}</span>
+            </Link>
+            <span className='text-gray-400 text-xs'>
+              {getTimeDistance(post.created_at)}
+            </span>
+          </CardHeader>
           <Link href={`/post/${post.id}`}>
             <CardContent className='p-0 text-base text-zinc-800 dark:text-zinc-200'>
               {post.content}
