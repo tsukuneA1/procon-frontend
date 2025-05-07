@@ -1,6 +1,7 @@
 'use client';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { AvatarImage } from '@radix-ui/react-avatar';
 import { CircleEllipsis, Copy, X } from 'lucide-react';
 import Link from 'next/link';
@@ -76,17 +77,9 @@ export default function PostForm() {
         {success && <p className='mt-2 text-green-500'>投稿しました！</p>}
 
         <div className='mt-4 flex justify-end'>
-          <button
-            type='submit'
-            onClick={handleSubmit}
-            disabled={!content.trim()}
-            className='rounded-lg bg-blue-500 px-4 py-2 text-white disabled:bg-blue-200'
-          >
-            投稿
-          </button>
+          <Button onClick={handleSubmit}>投稿</Button>
         </div>
 
-        {/* 下部固定 */}
         <div className='mt-auto rounded-lg bg-gray-100 p-4 text-sm text-zinc-600'>
           あなたのフォロワーは返信・引用できます
         </div>
