@@ -12,5 +12,5 @@ pre-commit:
 post-merge:
   commands:
     npm:
-      glob: "{package.json}"
+      glob: '{package.json}'
       run: npm install
