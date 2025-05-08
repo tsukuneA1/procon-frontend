@@ -34,6 +34,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { pagesPath } from "../../../utils/$path";
 
 export const NewPost = ({ user }: { user: User }) => {
 	const isDesktop = useMediaQuery(
@@ -108,9 +109,9 @@ export const NewPost = ({ user }: { user: User }) => {
 					<DialogHeader className="border-b py-4 px-6">
 						<div className="grid grid-cols-3">
 							<button
-								className="flex items-center cursor-pointer all-unset"
+								className="flex items-center cursor-pointer border-none all-unset"
 								onClick={() => setDialogOpen(false)}
-								type="button"
+								type="submit"
 							>
 								キャンセル
 							</button>
@@ -202,7 +203,7 @@ export const NewPost = ({ user }: { user: User }) => {
 	}
 
 	return (
-		<Link href={"posts/new"}>
+		<Link href={pagesPath.posts.new.$url()} className="cursor-pointer">
 			<div className="mx-auto w-2xl space-y-6 border p-4 rounded-t-2xl">
 				<div className="flex items-start gap-4 ">
 					<Avatar>
