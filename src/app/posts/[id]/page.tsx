@@ -10,9 +10,12 @@ type Props = {
 export default async function Page({ params }: Props) {
 	const postId = params.id;
 
-	const postRes = await fetch(`http://localhost:3000/api/v1/posts/${postId}`, {
-		cache: "no-store",
-	});
+	const postRes = await fetch(
+		`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${postId}`,
+		{
+			cache: "no-store",
+		},
+	);
 
 	if (!postRes.ok) {
 		throw new Error(`Failed to fetch post with id: ${postId}`);
