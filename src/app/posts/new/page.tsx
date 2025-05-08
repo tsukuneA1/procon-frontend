@@ -30,6 +30,7 @@ import { useState } from "react";
 import { visibilityOptions } from "@/constants/visibilityOptions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { pagesPath } from "../../../../utils/$path";
 
 export default function PostForm() {
 	const [content, setContent] = useState("");
@@ -66,7 +67,7 @@ export default function PostForm() {
 			success: () => {
 				setContent("");
 				setTimeout(() => {
-					router.push("/");
+					router.push(pagesPath.$url().pathname);
 				}, 1000);
 				return "投稿しました！";
 			},
@@ -79,7 +80,7 @@ export default function PostForm() {
 			<div className="flex min-h-screen flex-col">
 				<div className="flex items-center justify-between border-b px-4 py-4">
 					<div className="flex items-center gap-3">
-						<Link href="/">
+						<Link href={pagesPath.$url()}>
 							<X />
 						</Link>
 						<h2 className="font-bold text-lg">新規スレッド</h2>
