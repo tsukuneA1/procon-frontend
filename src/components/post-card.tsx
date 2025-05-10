@@ -40,21 +40,23 @@ export const PostCard = ({ post }: { post: Post }) => {
 							className="flex items-center gap-1 px-2"
 						>
 							<Heart className="h-4 w-4" />
-							12
+							{post.likes_count}
 						</Button>
 						<Button
 							variant="ghost"
 							size="sm"
 							className="flex items-center gap-1 px-2"
 						>
-							<MessageCircle className="h-4 w-4" />3
+							<MessageCircle className="h-4 w-4" />
+							{post.replies_count}
 						</Button>
 						<Button
 							variant="ghost"
 							size="sm"
 							className="flex items-center gap-1 px-2"
 						>
-							<Repeat2 className="h-4 w-4" />1
+							<Repeat2 className="h-4 w-4" />
+							{post.reposts_count}
 						</Button>
 					</div>
 				</div>
