@@ -1,5 +1,5 @@
-import { PostDetail } from "@/components/post-detail";
-import type { Post } from "@/types/post";
+import { PostDetailComponent } from "@/components/post-detail";
+import type { PostDetail } from "@/types/post_detail";
 
 type Props = {
 	params: {
@@ -21,7 +21,11 @@ export default async function Page({ params }: Props) {
 		throw new Error(`Failed to fetch post with id: ${postId}`);
 	}
 
-	const post: Post = await postRes.json();
+	const post: PostDetail = await postRes.json();
 
-	return <PostDetail post={post} />;
+	return (
+		<div className="mx-auto max-w-2xl space-y-6 p-4">
+			<PostDetailComponent post={post} />
+		</div>
+	);
 }

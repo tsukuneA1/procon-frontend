@@ -1,7 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
@@ -19,7 +17,9 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { breakPoints } from "@/constants/breakpoints";
+import { MOCK_CURRENT_USER } from "@/constants/mockCurrentUser";
 import { visibilityOptions } from "@/constants/visibilityOptions";
+import type { PostDetail } from "@/types/post_detail";
 import type { User } from "@/types/users";
 import { useMediaQuery } from "@mui/material";
 import {
@@ -30,78 +30,67 @@ import {
 	Images,
 	MapPin,
 } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
-import { pagesPath } from "../../../utils/$path";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
 
-export const NewPost = ({ user }: { user: User }) => {
+type Props = {
+	user: User;
+	replyToPost: PostDetail;
+};
+
+export default function ReplyForm({ user, replyToPost }: Props) {
 	const isDesktop = useMediaQuery(
-		`( min-width: ${breakPoints.mobileToDesktop} )`,
+		`(min-width: ${breakPoints.mobileToDesktop})`,
 	);
-
 	const [content, setContent] = useState("");
+	const [dialogOpen, setDialogOpen] = useState(false);
 	const [visibilityOption, setVisibilityOption] = useState(
 		visibilityOptions[0],
 	);
-	const [dialogOpen, setDialogOpen] = useState(false);
-	const router = useRouter();
 
 	const handleSubmit = async () => {
-		const postData = async () => {
-			const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`, {
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${replyToPost.id}/replies`,
+			{
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					post: {
-						content,
-						user_id: 1,
-					},
+					content,
+					reply_to_id: replyToPost.id,
+					user_id: MOCK_CURRENT_USER.id,
 				}),
-			});
-
-			if (!res.ok) {
-				const data = await res.json();
-				throw new Error(data.error || "投稿に失敗しました");
-			}
-
-			return res;
-		};
-
-		toast.promise(postData(), {
-			loading: "投稿中...",
-			success: () => {
-				setContent("");
-				setTimeout(() => {
-					router.push("/");
-				}, 1000);
-				return "投稿しました！";
 			},
-			error: "投稿に失敗しました...",
-		});
+		);
+
+		if (res.ok) {
+			setContent("");
+			location.reload();
+		} else {
+			alert("投稿に失敗しました");
+		}
 	};
+
 	if (isDesktop) {
 		return (
 			<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
 				<DialogTrigger asChild className="cursor-pointer">
-					<div className="mx-auto w-2xl space-y-6 border p-4 rounded-t-3xl">
-						<div className="flex items-start gap-4 ">
+					<div>
+						<div className="flex items-center space-x-4 mb-4 bg-gray-100 p-2 rounded-3xl">
 							<Avatar>
-								<AvatarImage src={user.image} />
-								<AvatarFallback>{user.name[0].toUpperCase()}</AvatarFallback>
+								<AvatarImage
+									src={user.image}
+									alt="User Avatar"
+									className="bg-white"
+								/>
+								<AvatarFallback>U</AvatarFallback>
 							</Avatar>
-							<div>
-								<div className="font-semibold text-zinc-800 dark:text-zinc-100">
-									{user.name}
-								</div>
 
-								<p className="mt-1 whitespace-pre-wrap text-base text-zinc-400 dark:text-zinc-200">
-									今なにしてる？
-								</p>
-							</div>
+							<p className="text-gray-700 font-semibold">
+								{replyToPost.user.name}に返信する
+							</p>
 						</div>
 					</div>
 				</DialogTrigger>
@@ -201,26 +190,22 @@ export const NewPost = ({ user }: { user: User }) => {
 			</Dialog>
 		);
 	}
-
 	return (
-		<Link href={pagesPath.posts.new.$url()} className="cursor-pointer">
-			<div className="mx-auto w-2xl space-y-6 border p-4 rounded-t-2xl">
-				<div className="flex items-start gap-4 ">
-					<Avatar>
-						<AvatarImage src={user.image} />
-						<AvatarFallback>{user.name[0].toUpperCase()}</AvatarFallback>
-					</Avatar>
-					<div>
-						<div className="font-semibold text-zinc-800 dark:text-zinc-100">
-							{user.name}
-						</div>
+		<div>
+			<div className="flex items-center space-x-4 mb-4 bg-gray-100 p-2 rounded-3xl">
+				<Avatar>
+					<AvatarImage
+						src={user.image}
+						alt="User Avatar"
+						className="bg-white"
+					/>
+					<AvatarFallback>U</AvatarFallback>
+				</Avatar>
 
-						<p className="mt-1 whitespace-pre-wrap text-base text-zinc-400 dark:text-zinc-200">
-							今なにしてる？
-						</p>
-					</div>
-				</div>
+				<p className="text-gray-700 font-semibold">
+					{replyToPost.user.name}に返信する
+				</p>
 			</div>
-		</Link>
+		</div>
 	);
-};
+}
