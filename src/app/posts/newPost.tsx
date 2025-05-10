@@ -7,6 +7,7 @@ import {
 	DialogContent,
 	DialogHeader,
 	DialogTitle,
+	DialogTrigger,
 } from "@/components/ui/dialog";
 import {
 	Select,
@@ -21,7 +22,6 @@ import { breakPoints } from "@/constants/breakpoints";
 import { visibilityOptions } from "@/constants/visibilityOptions";
 import type { User } from "@/types/users";
 import { useMediaQuery } from "@mui/material";
-import { DialogTrigger } from "@radix-ui/react-dialog";
 import {
 	CircleEllipsis,
 	Copy,
