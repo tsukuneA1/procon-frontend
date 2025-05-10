@@ -1,4 +1,4 @@
-export type Post = {
+export type PostDetail = {
 	id: number;
 	content: string;
 	created_at: string;
@@ -9,9 +9,9 @@ export type Post = {
 		id: number;
 		name: string;
 		image: string;
-		is_following: boolean;
 	};
 	replies_count: number;
 	likes_count: number;
 	reposts_count: number;
+	replies: PostDetail[];
 };
