@@ -10,12 +10,12 @@ import {
 import { UserPlus, SquareArrowOutUpRight } from 'lucide-react';
 
 export const UserIcon = ({ post }: { post: Post }) => {
-  switch (post.is_following) {
+  switch (post.user.is_following) {
     case true:
       return (
-        <Link href={`/users/${post.post.user_id}`}>
+        <Link href={`/users/${post.user_id}`}>
           <Avatar className='top-2 border-1 border-gray-300'>
-            <AvatarImage src={post.post.user.image} />
+            <AvatarImage src={post.user.image} />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
         </Link>
@@ -26,7 +26,7 @@ export const UserIcon = ({ post }: { post: Post }) => {
           <PopoverTrigger asChild>
             <Button variant='ghost' size='icon' className='top-2 rounded-full'>
               <Avatar className='border border-gray-300'>
-                <AvatarImage src={post.post.user.image} />
+                <AvatarImage src={post.user.image} />
                 <AvatarFallback>U</AvatarFallback>
               </Avatar>
             </Button>
@@ -39,8 +39,15 @@ export const UserIcon = ({ post }: { post: Post }) => {
               <span>フォロー</span>
               <UserPlus />
             </Button>
-            <Button variant='ghost' size='sm' className='flex justify-between'>
-              <span>プロフィールページ</span>
+            <Button
+              asChild
+              variant='ghost'
+              size='sm'
+              className='flex justify-between'
+            >
+              <Link href={`/users/${post.user_id}`}>
+                <span>プロフィールページ</span>
+              </Link>
               <SquareArrowOutUpRight />
             </Button>
           </PopoverContent>
