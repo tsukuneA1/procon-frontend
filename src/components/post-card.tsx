@@ -43,71 +43,6 @@ export const PostCard = ({ post }: { post: Post }) => {
               {getTimeDistance(post.created_at)}
             </span>
             {isDesktop ? (
-              <Drawer>
-                <DrawerTrigger asChild className='ml-auto text-gray-500'>
-                  <Button variant='ghost' size='icon'>
-                    <MoreHorizontal className='h-4 w-4' />
-                  </Button>
-                </DrawerTrigger>
-                <DrawerContent className='flex flex-col bg-neutral-200 p-4'>
-                  <DrawerTitle className='mt-3' />
-                  <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between'
-                    >
-                      <span>保存</span>
-                      <Bookmark />
-                    </Button>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between'
-                    >
-                      <span>興味なし</span>
-                      <EyeOff />
-                    </Button>
-                  </div>
-                  <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between'
-                    >
-                      <span>リンクをコピー</span>
-                      <Link2 />
-                    </Button>
-                  </div>
-                  <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between'
-                    >
-                      <span>ミュート</span>
-                      <MessageSquareOff />
-                    </Button>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between text-red-500'
-                    >
-                      <span>ブロック</span>
-                      <UserRoundX />
-                    </Button>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between text-red-500'
-                    >
-                      <span>報告する</span>
-                      <ShieldAlert />
-                    </Button>
-                  </div>
-                </DrawerContent>
-              </Drawer>
-            ) : (
               <Popover>
                 <PopoverTrigger asChild className='ml-auto text-gray-500'>
                   <Button variant='ghost' size='icon'>
@@ -118,62 +53,21 @@ export const PostCard = ({ post }: { post: Post }) => {
                   align='end'
                   className='m-0 flex flex-col divide-y p-0'
                 >
-                  <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between'
-                    >
-                      <span>保存</span>
-                      <Bookmark />
-                    </Button>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between'
-                    >
-                      <span>興味なし</span>
-                      <EyeOff />
-                    </Button>
-                  </div>
-                  <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between'
-                    >
-                      <span>リンクをコピー</span>
-                      <Link2 />
-                    </Button>
-                  </div>
-                  <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between'
-                    >
-                      <span>ミュート</span>
-                      <MessageSquareOff />
-                    </Button>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between text-red-500'
-                    >
-                      <span>ブロック</span>
-                      <UserRoundX />
-                    </Button>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='flex justify-between text-red-500'
-                    >
-                      <span>報告する</span>
-                      <ShieldAlert />
-                    </Button>
-                  </div>
+                  {PostOptions()}
                 </PopoverContent>
               </Popover>
+            ) : (
+              <Drawer>
+                <DrawerTrigger asChild className='ml-auto text-gray-500'>
+                  <Button variant='ghost' size='icon'>
+                    <MoreHorizontal className='h-4 w-4' />
+                  </Button>
+                </DrawerTrigger>
+                <DrawerContent className='flex flex-col bg-neutral-200 p-4'>
+                  <DrawerTitle className='mt-3' />
+                  {PostOptions()}
+                </DrawerContent>
+              </Drawer>
             )}
           </CardHeader>
           <Link href={`/post/${post.id}`}>
@@ -217,5 +111,50 @@ export const PostCard = ({ post }: { post: Post }) => {
         </div>
       </div>
     </Card>
+  );
+};
+
+const PostOptions = () => {
+  return (
+    <div>
+      <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
+        <Button variant='ghost' size='sm' className='flex justify-between'>
+          <span>保存</span>
+          <Bookmark />
+        </Button>
+        <Button variant='ghost' size='sm' className='flex justify-between'>
+          <span>興味なし</span>
+          <EyeOff />
+        </Button>
+      </div>
+      <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
+        <Button variant='ghost' size='sm' className='flex justify-between'>
+          <span>リンクをコピー</span>
+          <Link2 />
+        </Button>
+      </div>
+      <div className='m-1 flex flex-col divide-y rounded-md bg-white'>
+        <Button variant='ghost' size='sm' className='flex justify-between'>
+          <span>ミュート</span>
+          <MessageSquareOff />
+        </Button>
+        <Button
+          variant='ghost'
+          size='sm'
+          className='flex justify-between text-red-500'
+        >
+          <span>ブロック</span>
+          <UserRoundX />
+        </Button>
+        <Button
+          variant='ghost'
+          size='sm'
+          className='flex justify-between text-red-500'
+        >
+          <span>報告する</span>
+          <ShieldAlert />
+        </Button>
+      </div>
+    </div>
   );
 };
