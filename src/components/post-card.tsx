@@ -82,7 +82,7 @@ export const PostCard = ({ post }: { post: Post }) => {
               className='flex items-center gap-1 px-2'
             >
               <Heart className='h-4 w-4' />
-              {post.like_num}
+              {post.likes_count}
             </Button>
             <Button
               variant='ghost'
@@ -90,7 +90,7 @@ export const PostCard = ({ post }: { post: Post }) => {
               className='flex items-center gap-1 px-2'
             >
               <MessageCircle className='h-4 w-4' />
-              {post.reply_num}
+              {post.replies_count}
             </Button>
             <Button
               variant='ghost'
@@ -98,7 +98,7 @@ export const PostCard = ({ post }: { post: Post }) => {
               className='flex items-center gap-1 px-2'
             >
               <Repeat2 className='h-4 w-4' />
-              {post.repost_num}
+              {post.reposts_count}
             </Button>
             <Button
               variant='ghost'
