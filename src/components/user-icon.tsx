@@ -1,57 +1,83 @@
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import type { UserIconInfo } from '../types/user-icon';
+import type { UserIconInfo } from '../types/user-icon-info';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { UserPlus, SquareArrowOutUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { UserPlus, SquareArrowOutUpRight, UserMinus } from 'lucide-react';
 
 export const UserIcon = ({ iconInfo }: { iconInfo: UserIconInfo }) => {
-  switch (iconInfo.is_following) {
-    case true:
-      return (
-        <Link href={`/users/${iconInfo.user_id}`}>
-          <Avatar className='top-2 border-1 border-gray-300'>
+  const [isFollowing, setIsFollowing] = useState(iconInfo.is_following);
+  const handleFollow = async () => {
+    const res = await fetch('/api/follow', {
+      method: 'POST',
+      body: JSON.stringify({ user_id: iconInfo.user_id }),
+    });
+    setIsFollowing(res.ok);
+    if (res.ok) return;
+
+    alert('フォローに失敗しました');
+  };
+
+  if (iconInfo.is_following) {
+    return (
+      <Link href={`/users/${iconInfo.user_id}`}>
+        <Avatar className='top-2 border-1 border-gray-300'>
+          <AvatarImage src={iconInfo.image} />
+          <AvatarFallback>U</AvatarFallback>
+        </Avatar>
+      </Link>
+    );
+  }
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant='ghost' size='icon' className='top-2 rounded-full'>
+          <Avatar className='border border-gray-300'>
             <AvatarImage src={iconInfo.image} />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
-        </Link>
-      );
-    case false:
-      return (
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant='ghost' size='icon' className='top-2 rounded-full'>
-              <Avatar className='border border-gray-300'>
-                <AvatarImage src={iconInfo.image} />
-                <AvatarFallback>U</AvatarFallback>
-              </Avatar>
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent
-            align='start'
-            className='m-0 flex flex-col divide-y p-0'
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent align='start' className='m-0 flex flex-col divide-y p-0'>
+        {isFollowing ? (
+          <Button
+            variant='ghost'
+            size='sm'
+            className='flex justify-between'
+            onClick={handleFollow}
           >
-            <Button variant='ghost' size='sm' className='flex justify-between'>
-              <span>フォロー</span>
-              <UserPlus />
-            </Button>
-            <Button
-              asChild
-              variant='ghost'
-              size='sm'
-              className='flex justify-between'
-            >
-              <Link href={`/users/${iconInfo.user_id}`}>
-                <span>プロフィールページ</span>
-              </Link>
-              <SquareArrowOutUpRight />
-            </Button>
-          </PopoverContent>
-        </Popover>
-      );
-  }
+            <span>フォローをやめる</span>
+            <UserMinus />
+          </Button>
+        ) : (
+          <Button
+            variant='ghost'
+            size='sm'
+            className='flex justify-between'
+            onClick={handleFollow}
+          >
+            <span>フォロー</span>
+            <UserPlus />
+          </Button>
+        )}
+        <Button
+          asChild
+          variant='ghost'
+          size='sm'
+          className='flex justify-between'
+        >
+          <Link href={`/users/${iconInfo.user_id}`}>
+            <span>プロフィールページ</span>
+            <SquareArrowOutUpRight />
+          </Link>
+        </Button>
+      </PopoverContent>
+    </Popover>
+  );
 };
