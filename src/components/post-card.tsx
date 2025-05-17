@@ -26,14 +26,20 @@ import {
 import Link from 'next/link';
 import { useMediaQuery } from '@mui/material';
 import type { Post } from '@/types/post';
+import type { UserIconInfo } from '@/types/user-icon';
 
 export const PostCard = ({ post }: { post: Post }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)');
+  const userIconInfo: UserIconInfo = {
+    user_id: post.user_id,
+    image: post.user.image,
+    is_following: post.user.is_following,
+  };
 
   return (
-    <Card className='w-sm rounded-none p-4 pb-2 sm:w-2xs md:w-2xl'>
+    <Card className='w-full rounded-none p-4 pb-2 sm:w-2xs md:w-2xl'>
       <div className='flex gap-4'>
-        <UserIcon post={post} />
+        <UserIcon iconInfo={userIconInfo} />
         <div className='flex flex-1 flex-col'>
           <CardHeader className='flex items-center p-0 pb-0.5'>
             <Link href={`/users/${post.user_id}`}>
@@ -53,7 +59,7 @@ export const PostCard = ({ post }: { post: Post }) => {
                   align='end'
                   className='m-0 flex flex-col divide-y p-0'
                 >
-                  {PostOptions()}
+                  <PostOptions />
                 </PopoverContent>
               </Popover>
             ) : (
@@ -65,7 +71,7 @@ export const PostCard = ({ post }: { post: Post }) => {
                 </DrawerTrigger>
                 <DrawerContent className='flex flex-col bg-neutral-200 p-4'>
                   <DrawerTitle className='mt-3' />
-                  {PostOptions()}
+                  <PostOptions />
                 </DrawerContent>
               </Drawer>
             )}

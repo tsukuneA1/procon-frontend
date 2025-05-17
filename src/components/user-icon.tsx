@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import type { Post } from '../types/post';
+import type { UserIconInfo } from '../types/user-icon';
 import {
   Popover,
   PopoverContent,
@@ -9,13 +9,13 @@ import {
 } from '@/components/ui/popover';
 import { UserPlus, SquareArrowOutUpRight } from 'lucide-react';
 
-export const UserIcon = ({ post }: { post: Post }) => {
-  switch (post.user.is_following) {
+export const UserIcon = ({ iconInfo }: { iconInfo: UserIconInfo }) => {
+  switch (iconInfo.is_following) {
     case true:
       return (
-        <Link href={`/users/${post.user_id}`}>
+        <Link href={`/users/${iconInfo.user_id}`}>
           <Avatar className='top-2 border-1 border-gray-300'>
-            <AvatarImage src={post.user.image} />
+            <AvatarImage src={iconInfo.image} />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
         </Link>
@@ -26,7 +26,7 @@ export const UserIcon = ({ post }: { post: Post }) => {
           <PopoverTrigger asChild>
             <Button variant='ghost' size='icon' className='top-2 rounded-full'>
               <Avatar className='border border-gray-300'>
-                <AvatarImage src={post.user.image} />
+                <AvatarImage src={iconInfo.image} />
                 <AvatarFallback>U</AvatarFallback>
               </Avatar>
             </Button>
@@ -45,7 +45,7 @@ export const UserIcon = ({ post }: { post: Post }) => {
               size='sm'
               className='flex justify-between'
             >
-              <Link href={`/users/${post.user_id}`}>
+              <Link href={`/users/${iconInfo.user_id}`}>
                 <span>プロフィールページ</span>
               </Link>
               <SquareArrowOutUpRight />
