@@ -1,7 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import type { UserIconInfo } from '../types/user-icon-info';
 import {
   Popover,
   PopoverContent,
@@ -10,29 +9,25 @@ import {
 import { useState } from 'react';
 import { UserPlus, SquareArrowOutUpRight, UserMinus } from 'lucide-react';
 
+type UserIconInfo = {
+  id: number;
+  name: string;
+  image: string;
+  is_following: boolean;
+};
+
 export const UserIcon = ({ iconInfo }: { iconInfo: UserIconInfo }) => {
   const [isFollowing, setIsFollowing] = useState(iconInfo.is_following);
   const handleFollow = async () => {
     const res = await fetch('/api/follow', {
       method: 'POST',
-      body: JSON.stringify({ user_id: iconInfo.user_id }),
+      body: JSON.stringify({ user_id: iconInfo.id }),
     });
     setIsFollowing(res.ok);
     if (res.ok) return;
 
     alert('フォローに失敗しました');
   };
-
-  if (iconInfo.is_following) {
-    return (
-      <Link href={`/users/${iconInfo.user_id}`}>
-        <Avatar className='top-2 border-1 border-gray-300'>
-          <AvatarImage src={iconInfo.image} />
-          <AvatarFallback>U</AvatarFallback>
-        </Avatar>
-      </Link>
-    );
-  }
 
   return (
     <Popover>
@@ -72,7 +67,7 @@ export const UserIcon = ({ iconInfo }: { iconInfo: UserIconInfo }) => {
           size='sm'
           className='flex justify-between'
         >
-          <Link href={`/users/${iconInfo.user_id}`}>
+          <Link href={`/users/${iconInfo.id}`}>
             <span>プロフィールページ</span>
             <SquareArrowOutUpRight />
           </Link>
