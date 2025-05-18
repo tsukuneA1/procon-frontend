@@ -11,7 +11,6 @@ import { UserPlus, SquareArrowOutUpRight, UserMinus } from 'lucide-react';
 
 type UserIconInfo = {
   id: number;
-  name: string;
   image: string;
   is_following: boolean;
 };
