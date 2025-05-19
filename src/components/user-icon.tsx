@@ -11,7 +11,6 @@ import { UserPlus, SquareArrowOutUpRight, UserMinus } from 'lucide-react';
 
 type UserIconInfo = {
   id: number;
-  name: string;
   image: string;
   is_following: boolean;
 };
@@ -28,6 +27,17 @@ export const UserIcon = ({ iconInfo }: { iconInfo: UserIconInfo }) => {
 
     alert('フォローに失敗しました');
   };
+
+  if (iconInfo.is_following) {
+    return (
+      <Link href={`/users/${iconInfo.id}`}>
+        <Avatar className='top-2 border-1 border-gray-300'>
+          <AvatarImage src={iconInfo.image} />
+          <AvatarFallback>U</AvatarFallback>
+        </Avatar>
+      </Link>
+    );
+  }
 
   return (
     <Popover>
