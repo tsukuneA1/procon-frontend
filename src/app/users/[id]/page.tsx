@@ -1,4 +1,4 @@
-import { PostCard } from "@/components/post-card";
+import { PostCard } from "@/components/postCard";
 import { MainLayout } from "@/layouts/main/layout";
 import type { Post } from "@/types/post";
 import { v4 as uuidv4 } from "uuid";
@@ -13,7 +13,7 @@ export default async function Page({ params }: Props) {
 	const userId = params.id;
 
 	const userPostsRes = await fetch(
-		`${process.env.NEXT_PUBLIC_BASE_URL}/posts/user/${userId}`,
+		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/posts/user/${userId}`,
 		{
 			cache: "no-store",
 		},

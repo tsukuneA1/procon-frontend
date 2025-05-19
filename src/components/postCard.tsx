@@ -5,6 +5,7 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import { breakPoints } from "@/constants/breakpoints";
 import type { Post } from "@/types/post";
 import { useMediaQuery } from "@mui/material";
 import {
@@ -21,14 +22,17 @@ import {
 	UserRoundX,
 } from "lucide-react";
 import Link from "next/link";
+import { pagesPath } from "../../utils/$path";
 import { getTimeDistance } from "../lib/utils";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "./ui/drawer";
-import { UserIcon } from "./user-icon";
+import { UserIcon } from "./userIcon";
 
 export const PostCard = ({ post }: { post: Post }) => {
-	const isDesktop = useMediaQuery("(min-width: 768px)");
+	const isDesktop = useMediaQuery(
+		`(min-width: ${breakPoints.mobileToDesktop}px)`,
+	);
 
 	return (
 		<Card className="w-full rounded-none p-4 pb-2 sm:w-2xs md:w-2xl">
@@ -36,7 +40,7 @@ export const PostCard = ({ post }: { post: Post }) => {
 				<UserIcon iconInfo={{ ...post.user }} />
 				<div className="flex flex-1 flex-col">
 					<CardHeader className="flex items-center p-0 pb-0.5">
-						<Link href={`/users/${post.user_id}`}>
+						<Link href={pagesPath.users._id(post.user.id).$url().path}>
 							<span className="font-semibold text-sm">{post.user.name}</span>
 						</Link>
 						<span className="text-gray-400 text-xs">
@@ -70,7 +74,7 @@ export const PostCard = ({ post }: { post: Post }) => {
 							</Drawer>
 						)}
 					</CardHeader>
-					<Link href={`/post/${post.id}`}>
+					<Link href={pagesPath.posts._id(post.id).$url().path}>
 						<CardContent className="p-0 text-base text-zinc-800 dark:text-zinc-200">
 							{post.content}
 						</CardContent>

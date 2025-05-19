@@ -19,12 +19,15 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 			if (!token) return;
 
 			try {
-				const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/me`, {
-					credentials: "include",
-					headers: {
-						Authorization: `Bearer ${token}`,
+				const res = await fetch(
+					`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/me`,
+					{
+						credentials: "include",
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
 					},
-				});
+				);
 				if (res.ok) {
 					const data = await res.json();
 					setUser(data);

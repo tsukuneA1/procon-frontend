@@ -1,4 +1,5 @@
-import { PostDetailComponent } from "@/components/post-detail";
+import { PostDetailComponent } from "@/components/postDetail";
+import { fetchPostDetail } from "@/lib/api/post";
 import type { PostDetail } from "@/types/post_detail";
 
 type Props = {
@@ -8,20 +9,7 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-	const postId = params.id;
-
-	const postRes = await fetch(
-		`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${postId}`,
-		{
-			cache: "no-store",
-		},
-	);
-
-	if (!postRes.ok) {
-		throw new Error(`Failed to fetch post with id: ${postId}`);
-	}
-
-	const post: PostDetail = await postRes.json();
+	const post: PostDetail = await fetchPostDetail(params.id);
 
 	return (
 		<div className="mx-auto max-w-2xl space-y-6 p-4">

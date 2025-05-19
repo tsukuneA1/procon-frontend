@@ -5,21 +5,24 @@ type SignUpParams = {
 };
 
 export const signup = async ({ name, email, password }: SignUpParams) => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			user: {
-				name,
-				email,
-				password,
-				password_confirmation: password,
-				image: null,
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signup`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
 			},
-		}),
-	});
+			body: JSON.stringify({
+				user: {
+					name,
+					email,
+					password,
+					password_confirmation: password,
+					image: null,
+				},
+			}),
+		},
+	);
 
 	const data = await res.json();
 
@@ -31,14 +34,17 @@ export const signup = async ({ name, email, password }: SignUpParams) => {
 };
 
 export const signin = async (email: string, password: string) => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/signin`, {
-		method: "POST",
-		credentials: "include",
-		headers: {
-			"Content-Type": "application/json",
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signin`,
+		{
+			method: "POST",
+			credentials: "include",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email, password }),
 		},
-		body: JSON.stringify({ email, password }),
-	});
+	);
 
 	if (!res.ok) {
 		const error = await res.json();
@@ -49,16 +55,19 @@ export const signin = async (email: string, password: string) => {
 };
 
 export const signinWithGoogle = async (credential: string) => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/google`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				credential,
+			}),
+			credentials: "include",
 		},
-		body: JSON.stringify({
-			credential,
-		}),
-		credentials: "include",
-	});
+	);
 	const data = await res.json();
 	if (!res.ok) {
 		throw new Error(data.error || "Googleサインアップ失敗");

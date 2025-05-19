@@ -1,4 +1,5 @@
 "use client";
+import { fetchPostDetail } from "@/lib/api/post";
 import type { PostDetail } from "@/types/post_detail";
 import { useEffect, useState } from "react";
 import { Reply } from "./reply";
@@ -12,16 +13,13 @@ export const RepliedPostCard = ({
 
 	useEffect(() => {
 		const fetchParent = async () => {
-			if (repliedPostId) {
-				const res = await fetch(
-					`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${repliedPostId}`,
-				);
-				if (res.ok) {
-					const data: PostDetail = await res.json();
-					setParentPost(data);
-				} else {
-					console.error("Failed to fetch parent post:", res.statusText);
-				}
+			try {
+				const res = await fetchPostDetail(repliedPostId.toString());
+				setParentPost(res);
+			} catch (error) {
+				console.error("Failed to fetch post details:", error);
+				// Optionally, you can set a fallback state or notify the user here
+				setParentPost(null);
 			}
 		};
 

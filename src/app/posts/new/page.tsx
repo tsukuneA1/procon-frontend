@@ -29,6 +29,7 @@ import { useState } from "react";
 
 import { useUser } from "@/app/context/user-context";
 import { visibilityOptions } from "@/constants/visibilityOptions";
+import { createPost } from "@/lib/api/post";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { pagesPath } from "../../../../utils/$path";
@@ -44,25 +45,7 @@ export default function PostForm() {
 
 	const handleSubmit = async () => {
 		const postData = async () => {
-			const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					post: {
-						content,
-						user_id: user?.id,
-					},
-				}),
-			});
-
-			if (!res.ok) {
-				const data = await res.json();
-				throw new Error(data.error || "投稿に失敗しました");
-			}
-
-			return res;
+			await createPost(content, user?.id);
 		};
 
 		toast.promise(postData(), {
