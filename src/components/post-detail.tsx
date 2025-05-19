@@ -1,11 +1,12 @@
 "use client";
 
+import { useUser } from "@/app/context/user-context";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { MOCK_CURRENT_USER } from "@/constants/mockCurrentUser";
 import type { PostDetail } from "@/types/post_detail";
 import { Heart, MessageCircle, Repeat2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { pagesPath } from "../../utils/$path";
 import { RepliedPostCard } from "./replied-post-card";
 import ReplyForm from "./reply-form";
 import { ReplyPostCard } from "./reply-post-card";
@@ -13,6 +14,7 @@ import { Button } from "./ui/button";
 
 export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 	const mainPostRef = useRef<HTMLDivElement | null>(null);
+	const { user } = useUser();
 
 	useEffect(() => {
 		mainPostRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
@@ -27,7 +29,7 @@ export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 						<AvatarFallback>{post.user.name[0].toUpperCase()}</AvatarFallback>
 					</Avatar>
 					<div>
-						<Link href={`../users/${post.user_id}`}>
+						<Link href={pagesPath.users._id(post.user.id).$url()}>
 							<div className="font-semibold text-zinc-800 dark:text-zinc-100">
 								{post.user.name}
 							</div>
@@ -83,7 +85,7 @@ export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 			</div>
 
 			<div className="sticky bottom-0 w-full bg-white dark:bg-black border-t p-4">
-				<ReplyForm user={MOCK_CURRENT_USER} replyToPost={post} />
+				<ReplyForm user={user} replyToPost={post} />
 			</div>
 		</div>
 	);

@@ -27,6 +27,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 
+import { useUser } from "@/app/context/user-context";
 import { visibilityOptions } from "@/constants/visibilityOptions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -37,6 +38,8 @@ export default function PostForm() {
 	const [visibilityOption, setVisibilityOption] = useState(
 		visibilityOptions[0],
 	);
+	const { user } = useUser();
+
 	const router = useRouter();
 
 	const handleSubmit = async () => {
@@ -49,7 +52,7 @@ export default function PostForm() {
 				body: JSON.stringify({
 					post: {
 						content,
-						user_id: 1,
+						user_id: user?.id,
 					},
 				}),
 			});
@@ -94,7 +97,7 @@ export default function PostForm() {
 				<div className="mx-auto flex w-full max-w-xl flex-1 flex-col p-4">
 					<div className="flex items-start gap-4">
 						<Avatar>
-							<AvatarImage src="https://robohash.org/dolorestotamdolor.png?size=300x300&set=set1" />
+							<AvatarImage src={user?.image} />
 							<AvatarFallback>{"Ro"}</AvatarFallback>
 						</Avatar>
 						<div className="w-full">
