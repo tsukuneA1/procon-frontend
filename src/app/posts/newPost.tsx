@@ -20,7 +20,6 @@ import {
 } from "@/components/ui/select";
 import { breakPoints } from "@/constants/breakpoints";
 import { visibilityOptions } from "@/constants/visibilityOptions";
-import type { User } from "@/types/users";
 import { useMediaQuery } from "@mui/material";
 import {
 	CircleEllipsis,
@@ -35,8 +34,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { pagesPath } from "../../../utils/$path";
+import { useUser } from "../context/user-context";
 
-export const NewPost = ({ user }: { user: User }) => {
+export const NewPost = () => {
 	const isDesktop = useMediaQuery(
 		`( min-width: ${breakPoints.mobileToDesktop} )`,
 	);
@@ -46,6 +46,8 @@ export const NewPost = ({ user }: { user: User }) => {
 		visibilityOptions[0],
 	);
 	const [dialogOpen, setDialogOpen] = useState(false);
+	const { user } = useUser();
+
 	const router = useRouter();
 
 	const handleSubmit = async () => {
@@ -58,7 +60,7 @@ export const NewPost = ({ user }: { user: User }) => {
 				body: JSON.stringify({
 					post: {
 						content,
-						user_id: 1,
+						user_id: user?.id,
 					},
 				}),
 			});
@@ -90,12 +92,12 @@ export const NewPost = ({ user }: { user: User }) => {
 					<div className="mx-auto w-2xl space-y-6 border p-4 rounded-t-3xl">
 						<div className="flex items-start gap-4 ">
 							<Avatar>
-								<AvatarImage src={user.image} />
-								<AvatarFallback>{user.name[0].toUpperCase()}</AvatarFallback>
+								<AvatarImage src={user?.image} />
+								<AvatarFallback>{user?.name[0].toUpperCase()}</AvatarFallback>
 							</Avatar>
 							<div>
 								<div className="font-semibold text-zinc-800 dark:text-zinc-100">
-									{user.name}
+									{user?.name}
 								</div>
 
 								<p className="mt-1 whitespace-pre-wrap text-base text-zinc-400 dark:text-zinc-200">
@@ -128,12 +130,12 @@ export const NewPost = ({ user }: { user: User }) => {
 						<div className="mx-auto flex w-full max-w-xl flex-1 flex-col ">
 							<div className="flex items-start gap-4">
 								<Avatar>
-									<AvatarImage src="https://robohash.org/dolorestotamdolor.png?size=300x300&set=set1" />
+									<AvatarImage src={user?.image} />
 									<AvatarFallback>{"Ro"}</AvatarFallback>
 								</Avatar>
 								<div className="w-full">
 									<div className="font-semibold text-zinc-800 dark:text-zinc-100">
-										{"Rodney Ruecker"}
+										{user?.name}
 									</div>
 									<textarea
 										value={content}
@@ -207,12 +209,12 @@ export const NewPost = ({ user }: { user: User }) => {
 			<div className="mx-auto w-2xl space-y-6 border p-4 rounded-t-2xl">
 				<div className="flex items-start gap-4 ">
 					<Avatar>
-						<AvatarImage src={user.image} />
-						<AvatarFallback>{user.name[0].toUpperCase()}</AvatarFallback>
+						<AvatarImage src={user?.image} />
+						<AvatarFallback>{user?.name[0].toUpperCase()}</AvatarFallback>
 					</Avatar>
 					<div>
 						<div className="font-semibold text-zinc-800 dark:text-zinc-100">
-							{user.name}
+							{user?.name}
 						</div>
 
 						<p className="mt-1 whitespace-pre-wrap text-base text-zinc-400 dark:text-zinc-200">

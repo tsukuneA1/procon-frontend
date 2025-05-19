@@ -17,7 +17,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { breakPoints } from "@/constants/breakpoints";
-import { MOCK_CURRENT_USER } from "@/constants/mockCurrentUser";
 import { visibilityOptions } from "@/constants/visibilityOptions";
 import type { PostDetail } from "@/types/post_detail";
 import type { User } from "@/types/users";
@@ -35,7 +34,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 
 type Props = {
-	user: User;
+	user: User | null;
 	replyToPost: PostDetail;
 };
 
@@ -60,7 +59,7 @@ export default function ReplyForm({ user, replyToPost }: Props) {
 				body: JSON.stringify({
 					content,
 					reply_to_id: replyToPost.id,
-					user_id: MOCK_CURRENT_USER.id,
+					user_id: user?.id,
 				}),
 			},
 		);
@@ -81,7 +80,7 @@ export default function ReplyForm({ user, replyToPost }: Props) {
 						<div className="flex items-center space-x-4 mb-4 bg-gray-100 p-2 rounded-3xl">
 							<Avatar>
 								<AvatarImage
-									src={user.image}
+									src={user?.image}
 									alt="User Avatar"
 									className="bg-white"
 								/>
@@ -117,12 +116,12 @@ export default function ReplyForm({ user, replyToPost }: Props) {
 						<div className="mx-auto flex w-full max-w-xl flex-1 flex-col ">
 							<div className="flex items-start gap-4">
 								<Avatar>
-									<AvatarImage src="https://robohash.org/dolorestotamdolor.png?size=300x300&set=set1" />
+									<AvatarImage src={user?.image} />
 									<AvatarFallback>{"Ro"}</AvatarFallback>
 								</Avatar>
 								<div className="w-full">
 									<div className="font-semibold text-zinc-800 dark:text-zinc-100">
-										{"Rodney Ruecker"}
+										{user?.name}
 									</div>
 									<textarea
 										value={content}
@@ -195,7 +194,7 @@ export default function ReplyForm({ user, replyToPost }: Props) {
 			<div className="flex items-center space-x-4 mb-4 bg-gray-100 p-2 rounded-3xl">
 				<Avatar>
 					<AvatarImage
-						src={user.image}
+						src={user?.image}
 						alt="User Avatar"
 						className="bg-white"
 					/>
