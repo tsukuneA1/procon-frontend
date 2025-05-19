@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "biome check . && eslint .",
-		"lint:fix": "biome check . --write --unsafe",
+		"lint:fix": "biome check . --write --unsafe && eslint --fix .",
 		"format": "biome format ./src/**/* --write",
 		"check": "biome check --apply ./src/**/*",
 		"prepare": "husky install",
