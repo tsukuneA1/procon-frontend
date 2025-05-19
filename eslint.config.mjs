@@ -7,7 +7,7 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig([
 	{
-		ignores: ["**/node_modules/**", "**/.next/**", "src/app/components/ui/**"],
+		ignores: ["**/node_modules/**", "**/.next/**", "src/components/ui/**"],
 	},
 	{
 		files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
