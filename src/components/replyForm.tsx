@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { breakPoints } from "@/constants/breakpoints";
 import { visibilityOptions } from "@/constants/visibilityOptions";
+import { postReply } from "@/lib/api/post";
 import type { PostDetail } from "@/types/post_detail";
 import type { User } from "@/types/users";
 import { useMediaQuery } from "@mui/material";
@@ -30,6 +31,7 @@ import {
 	MapPin,
 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 
@@ -49,48 +51,42 @@ export default function ReplyForm({ user, replyToPost }: Props) {
 	);
 
 	const handleSubmit = async () => {
-		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${replyToPost.id}/replies`,
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					content,
-					reply_to_id: replyToPost.id,
-					user_id: user?.id,
-				}),
-			},
-		);
+		const replyData = async () => {
+			await postReply({
+				content: content,
+				replyToId: replyToPost.id,
+				userId: user?.id,
+			});
+		};
 
-		if (res.ok) {
-			setContent("");
-			location.reload();
-		} else {
-			alert("投稿に失敗しました");
-		}
+		toast.promise(replyData(), {
+			loading: "投稿中...",
+			success: () => {
+				setContent("");
+				location.reload();
+				return "投稿しました！";
+			},
+			error: "投稿に失敗しました...",
+		});
 	};
 
 	if (isDesktop) {
 		return (
 			<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
 				<DialogTrigger asChild className="cursor-pointer">
-					<div>
-						<div className="flex items-center space-x-4 mb-4 bg-gray-100 p-2 rounded-3xl">
-							<Avatar>
-								<AvatarImage
-									src={user?.image}
-									alt="User Avatar"
-									className="bg-white"
-								/>
-								<AvatarFallback>U</AvatarFallback>
-							</Avatar>
+					<div className="flex items-center space-x-4 mb-4 bg-gray-100 p-2 rounded-3xl">
+						<Avatar>
+							<AvatarImage
+								src={user?.image}
+								alt="User Avatar"
+								className="bg-white"
+							/>
+							<AvatarFallback>U</AvatarFallback>
+						</Avatar>
 
-							<p className="text-gray-700 font-semibold">
-								{replyToPost.user.name}に返信する
-							</p>
-						</div>
+						<p className="text-gray-700 font-semibold">
+							{replyToPost.user.name}に返信する
+						</p>
 					</div>
 				</DialogTrigger>
 				<DialogContent className="max-h-[80vh] overflow-y-auto p-0">

@@ -7,9 +7,9 @@ import { Heart, MessageCircle, Repeat2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { pagesPath } from "../../utils/$path";
-import { RepliedPostCard } from "./replied-post-card";
-import ReplyForm from "./reply-form";
-import { ReplyPostCard } from "./reply-post-card";
+import { RepliedPostCard } from "./repliedPostCard";
+import ReplyForm from "./replyForm";
+import { ReplyPostCard } from "./replyPostCard";
 import { Button } from "./ui/button";
 
 export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
@@ -29,7 +29,7 @@ export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 						<AvatarFallback>{post.user.name[0].toUpperCase()}</AvatarFallback>
 					</Avatar>
 					<div>
-						<Link href={pagesPath.users._id(post.user.id).$url()}>
+						<Link href={pagesPath.users._id(post.user.id).$url().path}>
 							<div className="font-semibold text-zinc-800 dark:text-zinc-100">
 								{post.user.name}
 							</div>
