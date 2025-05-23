@@ -15,7 +15,7 @@ export const Reply = ({ reply }: { reply: PostDetail }) => {
 						<AvatarFallback>{reply.user.name[0].toUpperCase()}</AvatarFallback>
 					</Avatar>
 
-					{reply.replies_count > 0 && (
+					{reply.repliesCount > 0 && (
 						<span className="w-px flex-1 bg-zinc-300 dark:bg-zinc-700 my-2" />
 					)}
 				</div>
@@ -31,7 +31,7 @@ export const Reply = ({ reply }: { reply: PostDetail }) => {
 							className="flex items-center gap-1 px-2"
 						>
 							<Heart className="h-4 w-4" />
-							{reply.likes_count}
+							{reply.likesCount}
 						</Button>
 						<Button
 							variant="ghost"
@@ -39,7 +39,7 @@ export const Reply = ({ reply }: { reply: PostDetail }) => {
 							className="flex items-center gap-1 px-2"
 						>
 							<MessageCircle className="h-4 w-4" />
-							{reply.replies_count}
+							{reply.repliesCount}
 						</Button>
 						<Button
 							variant="ghost"
@@ -47,7 +47,7 @@ export const Reply = ({ reply }: { reply: PostDetail }) => {
 							className="flex items-center gap-1 px-2"
 						>
 							<Repeat2 className="h-4 w-4" />
-							{reply.reposts_count}
+							{reply.repostsCount}
 						</Button>
 					</div>
 				</div>
