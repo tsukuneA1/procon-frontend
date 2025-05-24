@@ -1,6 +1,6 @@
 export type User = {
 	id: number;
-	created_at: string;
+	createdAt: string;
 	image: string;
 	name: string;
 	email: string;

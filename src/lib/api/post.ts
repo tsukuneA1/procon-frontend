@@ -1,10 +1,11 @@
-import type { PostDetail } from "@/types/post_detail";
+import type { Post } from "@/types/post";
 
-export async function fetchPostDetail(postId: string): Promise<PostDetail> {
+export async function fetchPostDetail(postId: string): Promise<Post> {
 	const res = await fetch(
 		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/posts/${postId}`,
 		{
 			cache: "no-store",
+			credentials: "include",
 		},
 	);
 
@@ -24,6 +25,7 @@ export async function createPost(
 		headers: {
 			"Content-Type": "application/json",
 		},
+		credentials: "include",
 		body: JSON.stringify({
 			content,
 			user_id: userId,
@@ -51,6 +53,7 @@ export async function postReply({
 			headers: {
 				"Content-Type": "application/json",
 			},
+			credentials: "include",
 			body: JSON.stringify({
 				content,
 				reply_to_id: replyToId,
@@ -62,4 +65,33 @@ export async function postReply({
 	if (!res.ok) {
 		throw new Error(`Failed to post reply: ${res.statusText}`);
 	}
+}
+
+export async function likePost({
+	postId,
+	userId,
+}: {
+	postId: number;
+	userId: number | undefined;
+}): Promise<Post> {
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/posts/${postId}/likes`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+			body: JSON.stringify({
+				user_id: userId,
+				post_id: postId,
+			}),
+		},
+	);
+
+	if (!res.ok) {
+		throw new Error(`Failed to like post: ${res.statusText}`);
+	}
+
+	return await fetchPostDetail(postId.toString());
 }
