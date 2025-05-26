@@ -22,8 +22,8 @@ export const RepliedPostCard = ({
 
 	return (
 		<>
-			{parentPost?.reply_to_id && (
-				<RepliedPostCard repliedPostId={parentPost.reply_to_id} />
+			{parentPost?.replyToId && (
+				<RepliedPostCard repliedPostId={parentPost.replyToId} />
 			)}
 
 			{parentPost && <Reply reply={parentPost} />}

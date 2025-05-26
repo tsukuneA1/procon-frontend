@@ -7,9 +7,9 @@ export type User = {
 	password: string;
 	profile: {
 		id: number;
-		user_id: number;
+		userId: number;
 		bio: string;
-		created_at: string;
-		updated_at: string;
+		createdAt: string;
+		updatedAt: string;
 	};
 };
