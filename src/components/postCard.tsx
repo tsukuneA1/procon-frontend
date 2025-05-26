@@ -44,7 +44,7 @@ export const PostCard = ({ post }: { post: Post }) => {
 							<span className="font-semibold text-sm">{post.user.name}</span>
 						</Link>
 						<span className="text-gray-400 text-xs">
-							{getTimeDistance(post.created_at)}
+							{getTimeDistance(post.createdAt)}
 						</span>
 						{isDesktop ? (
 							<Popover>
@@ -86,7 +86,7 @@ export const PostCard = ({ post }: { post: Post }) => {
 							className="flex items-center gap-1 px-2"
 						>
 							<Heart className="h-4 w-4" />
-							{post.likes_count}
+							{post.likesCount}
 						</Button>
 						<Button
 							variant="ghost"
@@ -94,7 +94,7 @@ export const PostCard = ({ post }: { post: Post }) => {
 							className="flex items-center gap-1 px-2"
 						>
 							<MessageCircle className="h-4 w-4" />
-							{post.replies_count}
+							{post.repliesCount}
 						</Button>
 						<Button
 							variant="ghost"
@@ -102,7 +102,7 @@ export const PostCard = ({ post }: { post: Post }) => {
 							className="flex items-center gap-1 px-2"
 						>
 							<Repeat2 className="h-4 w-4" />
-							{post.reposts_count}
+							{post.repostsCount}
 						</Button>
 						<Button
 							variant="ghost"

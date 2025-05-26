@@ -21,7 +21,7 @@ export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 	}, []);
 	return (
 		<div className="min-h-screen flex flex-col">
-			{post.reply_to_id && <RepliedPostCard repliedPostId={post.reply_to_id} />}
+			{post.replyToId && <RepliedPostCard repliedPostId={post.replyToId} />}
 			<div className="max-w-2xl space-y-6 flex-1 mb-200">
 				<div className="flex items-start gap-4" ref={mainPostRef}>
 					<Avatar>
@@ -45,7 +45,7 @@ export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 								className="flex items-center gap-1 px-2"
 							>
 								<Heart className="h-4 w-4" />
-								{post.likes_count}
+								{post.likesCount}
 							</Button>
 							<Button
 								variant="ghost"
@@ -53,7 +53,7 @@ export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 								className="flex items-center gap-1 px-2"
 							>
 								<MessageCircle className="h-4 w-4" />
-								{post.replies_count}
+								{post.repliesCount}
 							</Button>
 							<Button
 								variant="ghost"
@@ -61,13 +61,13 @@ export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 								className="flex items-center gap-1 px-2"
 							>
 								<Repeat2 className="h-4 w-4" />
-								{post.reposts_count}
+								{post.repostsCount}
 							</Button>
 						</div>
 					</div>
 				</div>
 
-				{post.replies_count > 0 && (
+				{post.repliesCount > 0 && (
 					<div className="mt-4">
 						<div className="flex items-center gap-2 text-sm text-zinc-500 justify-between py-2 border-t">
 							<h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100">
