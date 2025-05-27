@@ -1,35 +1,29 @@
-import { PostCard } from "@/components/postCard";
-import { MainLayout } from "@/layouts/main/layout";
-import type { Post } from "@/types/post";
-import { v4 as uuidv4 } from "uuid";
+import { PostCard } from '@/components/post-card';
+import { MainLayout } from '@/layouts/main/layout';
+import type { Post } from '@/types/post';
+import { v4 as uuidv4 } from 'uuid';
+import { UserProfile } from '@/components/userprofile';
+import { mockUser } from '@/const/mockUser';
+import { fetchUser } from '@/lib/api/user';
+import { fetchUserPosts } from '@/lib/api/posts';
 
 type Props = {
-	params: {
-		id: string;
-	};
+  params: {
+    id: string;
+  };
 };
-
 export default async function Page({ params }: Props) {
-	const userId = params.id;
+  const userId = params.id;
 
-	const userPostsRes = await fetch(
-		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/posts/user/${userId}`,
-		{
-			cache: "no-store",
-		},
-	);
+  const user = await fetchUser(userId);
+  const posts = await fetchUserPosts(userId);
 
-	if (!userPostsRes.ok) {
-		throw new Error(`Failed to fetch post with id: ${userId}`);
-	}
-
-	const posts: Post[] = await userPostsRes.json();
-
-	return (
-		<MainLayout>
-			{posts.map((post) => (
-				<PostCard key={uuidv4()} post={post} />
-			))}
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <UserProfile {...mockUser} />
+      {posts.map((post) => (
+        <PostCard key={uuidv4()} post={post} />
+      ))}
+    </MainLayout>
+  );
 }

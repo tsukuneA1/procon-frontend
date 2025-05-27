@@ -1,17 +1,13 @@
 export type Post = {
-	id: number;
-	content: string;
-	createdAt: string;
-	updatedAt: string;
-	userId: number;
-	replyToId: number | null;
-	user: {
-		id: number;
-		name: string;
-		image: string;
-		isFollowing: boolean;
-	};
-	repliesCount: number;
-	likesCount: number;
-	repostsCount: number;
+  id: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  user_id: number;
+  status: string;
+  user: {
+    id: number;
+    name: string;
+    image: string;
+  };
 };
