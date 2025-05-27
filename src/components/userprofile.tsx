@@ -4,21 +4,21 @@ import { Button } from '@/components/ui/button';
 import { Mail, CalendarDays,ChevronLeft,Search,MoreHorizontal } from 'lucide-react';
 import type { UserProfileProps } from '@/types/profile.ts';
 
-export const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
+export const UserProfile = ({ user }: UserProfileProps ) => {
   return (
     <div className='min-h-screen w-full bg-gray-100'>
       <div className="max-w mx-auto relative">
         <div className="flex items-center justify-between px-6 absolute top-33 left-0 right-0 z-10">
-          <button className="rounded-full bg-black/50 p-2">
+          <Button className="rounded-full bg-black/50 p-2">
             <ChevronLeft className="h-5 w-5 text-white" />
-          </button>
+          </Button>
           <div className="flex gap-2">
-            <button className="rounded-full bg-black/50 p-2">
+            <Button className="rounded-full bg-black/50 p-2">
               <Search className="h-5 w-5 text-white" />
-            </button>
-            <button className="rounded-full bg-black/50 p-2">
+            </Button>
+            <Button className="rounded-full bg-black/50 p-2">
               <MoreHorizontal className="h-5 w-5 text-white" />
-            </button>
+            </Button>
           </div>
         </div>
         <Card className='w-full rounded-none bg-white'>
@@ -37,7 +37,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
           <CardContent className='mt-4 pt-4 px-10'>
             <div className='mb-4 flex items-center justify-end'>
               <div className='flex gap-4'>
-                <Button variant='outline' size="icon" className="rounded-full bg-transparent border-gray-600 hover:bg-gray-800">
+                <Button variant='outline' size="icon" className="rounded-full bg-transparent border-gray-600 hover:bg-gray-200">
                   <Mail className="h-5 w-5" />
                 </Button>
                 <Button className="rounded-full bg-black text-white hover:bg-gray-200 px-15 min-w-24">フォローする</Button>
