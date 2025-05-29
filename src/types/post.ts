@@ -9,7 +9,7 @@ export type Post = {
 		id: number;
 		name: string;
 		image: string;
-		is_following: boolean;
+		isFollowing: boolean;
 	};
 	repliesCount: number;
 	likesCount: number;

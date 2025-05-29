@@ -24,12 +24,12 @@ export const LikeButton = ({
 	const [isAnimating, setIsAnimating] = useState(false);
 
 	const handleLike = async () => {
-		await likePost({ postId: postId, userId: userId });
 		setLiked(!liked);
 		setLikes((prev) => (liked ? prev - 1 : prev + 1));
 
 		setIsAnimating(true);
 		setTimeout(() => setIsAnimating(false), 500);
+		await likePost({ postId: postId, userId: userId });
 	};
 
 	return (
