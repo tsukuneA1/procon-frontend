@@ -23,7 +23,7 @@ export default function Page({ params }: Props) {
 		if (!token) return;
 
 		async function load() {
-			const postData = await fetchPostDetail(params.id, token);
+			const postData = await fetchPostDetail(params.id);
 			setPost(postData);
 		}
 		load();
