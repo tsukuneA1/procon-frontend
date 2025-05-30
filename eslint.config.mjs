@@ -25,6 +25,8 @@ export default defineConfig([
 	{
 		plugins: { prettier },
 		rules: {
+			quotes: ["error", "double"],
+			indent: ["error", "tab"],
 			semi: ["error", "always"],
 			"react/react-in-jsx-scope": "off",
 			"prettier/prettier": "off",
