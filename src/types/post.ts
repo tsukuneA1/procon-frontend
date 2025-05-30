@@ -14,4 +14,6 @@ export type Post = {
 	repliesCount: number;
 	likesCount: number;
 	repostsCount: number;
+	replies: Post[];
+	isLiked: boolean;
 };

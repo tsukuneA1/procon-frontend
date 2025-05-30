@@ -9,6 +9,7 @@ export const signup = async ({ name, email, password }: SignUpParams) => {
 		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signup`,
 		{
 			method: "POST",
+			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -66,6 +67,7 @@ export const signinWithGoogle = async (credential: string) => {
 				credential,
 			}),
 			credentials: "include",
+			cache: "no-store",
 		},
 	);
 	const data = await res.json();
