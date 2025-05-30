@@ -12,11 +12,11 @@ import { Button } from "./ui/button";
 type UserIconInfo = {
 	id: number;
 	image: string;
-	is_following: boolean;
+	isFollowing: boolean;
 };
 
 export const UserIcon = ({ iconInfo }: { iconInfo: UserIconInfo }) => {
-	const [isFollowing, setIsFollowing] = useState(iconInfo.is_following);
+	const [isFollowing, setIsFollowing] = useState(iconInfo.isFollowing);
 	const handleFollow = async () => {
 		const res = await fetch("/api/follow", {
 			method: "POST",
@@ -28,7 +28,7 @@ export const UserIcon = ({ iconInfo }: { iconInfo: UserIconInfo }) => {
 		alert("フォローに失敗しました");
 	};
 
-	if (iconInfo.is_following) {
+	if (iconInfo.isFollowing) {
 		return (
 			<Link href={`/users/${iconInfo.id}`}>
 				<Avatar className="top-2 border-1 border-gray-300">

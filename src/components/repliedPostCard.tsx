@@ -13,8 +13,14 @@ export const RepliedPostCard = ({
 
 	useEffect(() => {
 		const fetchParent = async () => {
-			const res = await fetchPostDetail(repliedPostId.toString());
-			setParentPost(res);
+			try {
+				const res = await fetchPostDetail(repliedPostId.toString());
+				setParentPost(res);
+			} catch (error) {
+				console.error("Failed to fetch post details:", error);
+				// Optionally, you can set a fallback state or notify the user here
+				setParentPost(null);
+			}
 		};
 
 		fetchParent();
@@ -22,8 +28,8 @@ export const RepliedPostCard = ({
 
 	return (
 		<>
-			{parentPost?.reply_to_id && (
-				<RepliedPostCard repliedPostId={parentPost.reply_to_id} />
+			{parentPost?.replyToId && (
+				<RepliedPostCard repliedPostId={parentPost.replyToId} />
 			)}
 
 			{parentPost && <Reply reply={parentPost} />}
