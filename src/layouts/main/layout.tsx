@@ -20,7 +20,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 				</div>
 			</div>
 			<div className="flex min-h-screen flex-col justify-center items-center">
-				<main className="mx-auto flex w-full max-w-3xl flex-grow flex-col items-center mt-10 bg-white">
+				<main className="mx-auto flex w-full max-w-3xl flex-grow flex-col items-center mt-10">
 					{children}
 				</main>
 				<Toaster />
