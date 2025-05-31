@@ -1,3 +1,10 @@
+import { BotMessageSquare } from "lucide-react";
+
 export const Header = () => {
-	return <h1>header</h1>;
+	return (
+		<div className="p-3">
+			{/* TODO: 本番用のアイコン設定 */}
+			<BotMessageSquare />
+		</div>
+	);
 };
