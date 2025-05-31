@@ -12,13 +12,15 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 	);
 
 	return isDesktop ? (
-		<div>
+		<div className="bg-gray-50">
 			<div className="fixed h-full border-t border-border">
 				<Header />
-				<Footer isVertical={isDesktop} />
+				<div className="h-full py-45">
+					<Footer isVertical={isDesktop} />
+				</div>
 			</div>
 			<div className="flex min-h-screen flex-col justify-center items-center">
-				<main className="mx-auto flex w-full max-w-3xl flex-grow flex-col items-center">
+				<main className="mx-auto flex w-full max-w-3xl flex-grow flex-col items-center mt-10 bg-white">
 					{children}
 				</main>
 				<Toaster />
@@ -26,7 +28,9 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 		</div>
 	) : (
 		<div className="flex min-h-screen flex-col">
-			<Header />
+			<div className="flex justify-center">
+				<Header />
+			</div>
 			<main className="mx-auto flex w-full max-w-3xl flex-grow flex-col items-center">
 				{children}
 			</main>
