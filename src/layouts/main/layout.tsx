@@ -15,7 +15,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 		<div className="bg-gray-50">
 			<div className="fixed h-full border-t border-border">
 				<Header />
-				<div className="h-full py-45">
+				<div className="h-full py-44">
 					<Footer isVertical={isDesktop} />
 				</div>
 			</div>
