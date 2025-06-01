@@ -8,7 +8,7 @@ import { useMediaQuery } from "@mui/material";
 
 export const MainLayout = ({ children }: { children: React.ReactNode }) => {
 	const isDesktop = useMediaQuery(
-		`(min-width: ${breakPoints.mobileToDesktop}px)`,
+		`(min-width: ${breakPoints.mobileToDesktop})`,
 	);
 
 	return isDesktop ? (

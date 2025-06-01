@@ -31,7 +31,7 @@ import { UserIcon } from "./userIcon";
 
 export const PostCard = ({ post }: { post: Post }) => {
 	const isDesktop = useMediaQuery(
-		`(min-width: ${breakPoints.mobileToDesktop}px)`,
+		`(min-width: ${breakPoints.mobileToDesktop})`,
 	);
 
 	return (
