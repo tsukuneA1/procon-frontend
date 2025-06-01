@@ -15,7 +15,12 @@ export const Footer = ({
 		<div className="flex flex-col h-full px-3 py-1 text-gray-500 bg-gray-50">
 			{icons.map(({ component: Icon, key }) => (
 				<div key={key} className="flex h-1/4 justify-center items-center">
-					<Button asChild variant="ghost" size="icon">
+					<Button
+						asChild
+						variant="ghost"
+						size="icon"
+						className="cursor-pointer"
+					>
 						<Icon className="p-1" />
 					</Button>
 				</div>
@@ -25,7 +30,12 @@ export const Footer = ({
 		<div className="flex w-full px-1 py-3 text-gray-500 bg-white">
 			{icons.map(({ component: Icon, key }) => (
 				<div key={key} className="flex w-1/4 justify-center items-center">
-					<Button asChild variant="ghost" size="icon">
+					<Button
+						asChild
+						variant="ghost"
+						size="icon"
+						className="cursor-pointer"
+					>
 						<Icon className="p-1" />
 					</Button>
 				</div>
