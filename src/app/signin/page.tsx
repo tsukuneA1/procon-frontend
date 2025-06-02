@@ -20,7 +20,6 @@ export default function SignInPage() {
 	const handleSignIn = async () => {
 		try {
 			const data = await signin(email, password);
-			localStorage.setItem("token", data.token);
 			setUser(data.user);
 			alert(`Welcome ${data.user.name}`);
 			window.location.href = "/";
