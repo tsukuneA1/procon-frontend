@@ -1,6 +1,3 @@
-"use client";
-import { breakPoints } from "@/constants/breakpoints";
-import { useMediaQuery } from "@mui/material";
 import { Heart, House, Search, User } from "lucide-react";
 import { Button } from "../../ui/button";
 
@@ -12,29 +9,13 @@ export const Footer = () => {
 		{ component: User, key: "User" },
 	];
 
-	const isLargeScreen = useMediaQuery(
-		`(min-width: ${breakPoints.mobileToDesktop})`,
-	);
-
-	return isLargeScreen ? (
-		<div className="flex flex-col h-full px-3 py-1 text-gray-500 bg-gray-50">
+	return (
+		<div className="flex md:flex-col md:h-full md:w-fit w-full px-1 md:px-3 py-3 md:py-1 text-gray-500 bg-gray-50">
 			{icons.map(({ component: Icon, key }) => (
-				<div key={key} className="flex h-1/4 justify-center items-center">
-					<Button
-						asChild
-						variant="ghost"
-						size="icon"
-						className="cursor-pointer"
-					>
-						<Icon className="p-1" />
-					</Button>
-				</div>
-			))}
-		</div>
-	) : (
-		<div className="flex w-full px-1 py-3 text-gray-500 bg-white">
-			{icons.map(({ component: Icon, key }) => (
-				<div key={key} className="flex w-1/4 justify-center items-center">
+				<div
+					key={key}
+					className="flex md:h-1/4 w-1/4 md:w-fit justify-center items-center"
+				>
 					<Button
 						asChild
 						variant="ghost"
