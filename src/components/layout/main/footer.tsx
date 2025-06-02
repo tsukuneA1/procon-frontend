@@ -1,4 +1,6 @@
 import { Heart, House, Search, User } from "lucide-react";
+import Link from "next/link";
+import { pagesPath } from "../../../../utils/$path";
 import { Button } from "../../ui/button";
 
 export const Footer = () => {
@@ -7,21 +9,26 @@ export const Footer = () => {
 			component: <House />,
 			key: "House",
 			label: "トップページへ移動",
+			link: pagesPath.$url().path,
 		},
 		{
 			component: <Search />,
 			key: "Search",
 			label: "検索ページへ移動",
+			link: pagesPath.search.$url().path,
 		},
 		{
 			component: <Heart />,
 			key: "Heart",
 			label: "通知ページへ移動",
+			link: pagesPath.notice.$url().path,
 		},
 		{
 			component: <User />,
 			key: "User",
 			label: "マイページへ移動",
+			// 仮にmeとかにしてるが、実際は自身のユーザIDが入る
+			link: pagesPath.users._id("me").$url().path,
 		},
 	];
 
@@ -32,15 +39,17 @@ export const Footer = () => {
 					key={icon.key}
 					className="flex md:h-1/4 w-1/4 md:w-fit justify-center items-center"
 				>
-					<Button
-						asChild
-						variant="ghost"
-						size="icon"
-						className="cursor-pointer p-1"
-						aria-label={icon.label}
-					>
-						{icon.component}
-					</Button>
+					<Link href={icon.link}>
+						<Button
+							asChild
+							variant="ghost"
+							size="icon"
+							className="cursor-pointer p-1"
+							aria-label={icon.label}
+						>
+							{icon.component}
+						</Button>
+					</Link>
 				</div>
 			))}
 		</footer>
