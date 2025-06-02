@@ -3,10 +3,26 @@ import { Button } from "../../ui/button";
 
 export const Footer = () => {
 	const icons = [
-		{ component: <House />, key: "House", label: "トップページへ移動" },
-		{ component: <Search />, key: "Search", label: "検索ページへ移動" },
-		{ component: <Heart />, key: "Heart", label: "通知ページへ移動" },
-		{ component: <User />, key: "User", label: "マイページへ移動" },
+		{
+			component: <House className="p-1" />,
+			key: "House",
+			label: "トップページへ移動",
+		},
+		{
+			component: <Search className="p-1" />,
+			key: "Search",
+			label: "検索ページへ移動",
+		},
+		{
+			component: <Heart className="p-1" />,
+			key: "Heart",
+			label: "通知ページへ移動",
+		},
+		{
+			component: <User className="p-1" />,
+			key: "User",
+			label: "マイページへ移動",
+		},
 	];
 
 	return (
@@ -23,7 +39,7 @@ export const Footer = () => {
 						className="cursor-pointer"
 						aria-label={icon.label}
 					>
-						<div className="p-1">{icon.component}</div>
+						{icon.component}
 					</Button>
 				</div>
 			))}
