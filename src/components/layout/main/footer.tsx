@@ -3,15 +3,15 @@ import { Button } from "../../ui/button";
 
 export const Footer = () => {
 	const icons = [
-		{ component: House, key: "House" },
-		{ component: Search, key: "Search" },
-		{ component: Heart, key: "Heart" },
-		{ component: User, key: "User" },
+		{ component: House, key: "House", label: "Home" },
+		{ component: Search, key: "Search", label: "Search" },
+		{ component: Heart, key: "Heart", label: "Notice" },
+		{ component: User, key: "User", label: "Profile" },
 	];
 
 	return (
 		<div className="flex md:flex-col md:h-full md:w-fit w-full px-1 md:px-3 py-3 md:py-1 text-gray-500 bg-gray-50">
-			{icons.map(({ component: Icon, key }) => (
+			{icons.map(({ component: Icon, key, label }) => (
 				<div
 					key={key}
 					className="flex md:h-1/4 w-1/4 md:w-fit justify-center items-center"
@@ -21,6 +21,7 @@ export const Footer = () => {
 						variant="ghost"
 						size="icon"
 						className="cursor-pointer"
+						aria-label={label}
 					>
 						<Icon className="p-1" />
 					</Button>
