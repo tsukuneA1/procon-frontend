@@ -26,7 +26,7 @@ export const Footer = () => {
 	];
 
 	return (
-		<div className="flex md:flex-col md:h-full md:py-44 md:w-fit w-full px-1 md:px-3 py-3 text-gray-500 bg-white md:bg-gray-50">
+		<footer className="flex md:flex-col md:h-full md:py-44 md:w-fit w-full px-1 md:px-3 py-3 text-gray-500 bg-white md:bg-gray-50">
 			{icons.map((icon) => (
 				<div
 					key={icon.key}
@@ -43,6 +43,6 @@ export const Footer = () => {
 					</Button>
 				</div>
 			))}
-		</div>
+		</footer>
 	);
 };
