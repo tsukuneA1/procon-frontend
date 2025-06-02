@@ -1,15 +1,20 @@
+"use client";
+import { breakPoints } from "@/constants/breakpoints";
+import { useMediaQuery } from "@mui/material";
 import { Heart, House, Search, User } from "lucide-react";
 import { Button } from "../../ui/button";
 
-export const Footer = ({
-	isVertical: isLargeScreen,
-}: { isVertical: boolean }) => {
+export const Footer = () => {
 	const icons = [
 		{ component: House, key: "House" },
 		{ component: Search, key: "Search" },
 		{ component: Heart, key: "Heart" },
 		{ component: User, key: "User" },
 	];
+
+	const isLargeScreen = useMediaQuery(
+		`(min-width: ${breakPoints.mobileToDesktop})`,
+	);
 
 	return isLargeScreen ? (
 		<div className="flex flex-col h-full px-3 py-1 text-gray-500 bg-gray-50">
