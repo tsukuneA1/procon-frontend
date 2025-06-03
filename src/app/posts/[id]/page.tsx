@@ -1,6 +1,7 @@
 "use client";
 
 import { PostDetailComponent } from "@/components/postDetail";
+import { MainLayout } from "@/layouts/main/layout";
 import { fetchPostDetail } from "@/lib/api/post";
 import type { Post } from "@/types/post";
 import { useEffect, useState } from "react";
@@ -13,27 +14,25 @@ type Props = {
 
 export default function Page({ params }: Props) {
 	const [post, setPost] = useState<Post | null>(null);
-	const [token, setToken] = useState<string | null>(null);
 
 	useEffect(() => {
-		setToken(localStorage.getItem("token"));
-	}, []);
+		const getPost = async () => {
+			try {
+				const fetchedPost = await fetchPostDetail(params.id);
+				setPost(fetchedPost);
+			} catch (error) {
+				console.error("Failed to fetch post:", error);
+			}
+		};
 
-	useEffect(() => {
-		if (!token) return;
-
-		async function load() {
-			const postData = await fetchPostDetail(params.id);
-			setPost(postData);
-		}
-		load();
-	}, [params.id, token]);
+		getPost();
+	}, [params.id]);
 
 	if (!post) return <div>Loading...</div>;
 
 	return (
-		<div className="mx-auto space-y-6">
+		<MainLayout>
 			<PostDetailComponent post={post} />
-		</div>
+		</MainLayout>
 	);
 }
