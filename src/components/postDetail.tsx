@@ -1,18 +1,14 @@
 "use client";
 
 import { useUser } from "@/app/context/user-context";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { PostDetail } from "@/types/post_detail";
-import { Heart, MessageCircle, Repeat2 } from "lucide-react";
-import Link from "next/link";
+import type { Post } from "@/types/post";
 import { useEffect, useRef } from "react";
-import { pagesPath } from "../../utils/$path";
+import { PostCard } from "./postCard";
 import { RepliedPostCard } from "./repliedPostCard";
 import ReplyForm from "./replyForm";
 import { ReplyPostCard } from "./replyPostCard";
-import { Button } from "./ui/button";
 
-export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
+export const PostDetailComponent = ({ post }: { post: Post }) => {
 	const mainPostRef = useRef<HTMLDivElement | null>(null);
 	const { user } = useUser();
 
@@ -22,50 +18,9 @@ export const PostDetailComponent = ({ post }: { post: PostDetail }) => {
 	return (
 		<div className="min-h-screen flex flex-col">
 			{post.replyToId && <RepliedPostCard repliedPostId={post.replyToId} />}
-			<div className="max-w-2xl space-y-6 flex-1 mb-200">
-				<div className="flex items-start gap-4" ref={mainPostRef}>
-					<Avatar>
-						<AvatarImage src={post.user.image} />
-						<AvatarFallback>{post.user.name[0].toUpperCase()}</AvatarFallback>
-					</Avatar>
-					<div>
-						<Link href={pagesPath.users._id(post.user.id).$url().path}>
-							<div className="font-semibold text-zinc-800 dark:text-zinc-100">
-								{post.user.name}
-							</div>
-						</Link>
-
-						<p className="mt-1 whitespace-pre-wrap text-base text-zinc-900 dark:text-zinc-200">
-							{post.content}
-						</p>
-						<div className="mt-3 flex gap-4 text-sm text-zinc-500">
-							<Button
-								variant="ghost"
-								size="sm"
-								className="flex items-center gap-1 px-2"
-							>
-								<Heart className="h-4 w-4" />
-								{post.likesCount}
-							</Button>
-							<Button
-								variant="ghost"
-								size="sm"
-								className="flex items-center gap-1 px-2"
-							>
-								<MessageCircle className="h-4 w-4" />
-								{post.repliesCount}
-							</Button>
-							<Button
-								variant="ghost"
-								size="sm"
-								className="flex items-center gap-1 px-2"
-							>
-								<Repeat2 className="h-4 w-4" />
-								{post.repostsCount}
-							</Button>
-						</div>
-					</div>
-				</div>
+			<div className="max-w-2xl flex-1">
+				<div ref={mainPostRef} />
+				<PostCard post={post} />
 
 				{post.repliesCount > 0 && (
 					<div className="mt-4">

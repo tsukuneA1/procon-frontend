@@ -15,17 +15,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		const fetchMe = async () => {
-			const token = localStorage.getItem("token");
-			if (!token) return;
-
 			try {
 				const res = await fetch(
 					`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/me`,
 					{
 						credentials: "include",
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
 					},
 				);
 				if (res.ok) {
