@@ -45,6 +45,12 @@ export const pagesPath = {
 			$url: (url?: { hash?: string }) => ({ pathname: "/users/[id]" as const, query: { id }, hash: url?.hash, path: `/users/${id}${buildSuffix(url)}` })
 		})
 	},
+  "search": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/search' as const, hash: url?.hash, path: `/search${buildSuffix(url)}` })
+  },
+  "notice": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/notice' as const, hash: url?.hash, path: `/notice${buildSuffix(url)}` })
+  },
 	$url: (url?: { hash?: string }) => ({ pathname: "/" as const, hash: url?.hash, path: `/${buildSuffix(url)}` })
 };
 
