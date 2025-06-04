@@ -15,7 +15,6 @@ import {
 	MessageCircle,
 	MessageSquareOff,
 	MoreHorizontal,
-	Repeat2,
 	Share,
 	ShieldAlert,
 	UserRoundX,
@@ -24,6 +23,7 @@ import Link from "next/link";
 import { pagesPath } from "../../utils/$path";
 import { getTimeDistance } from "../lib/utils";
 import { LikeButton } from "./likeButton";
+import { RepostButton } from "./repostButton";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "./ui/drawer";
@@ -83,7 +83,7 @@ export const PostCard = ({ post }: { post: Post }) => {
 					<div className="mt-3 flex gap-4 text-sm text-zinc-500">
 						<LikeButton
 							initialLiked={post.isLiked}
-							initialLikes={post.likesCount}
+							initialLikesCount={post.likesCount}
 							postId={post.id}
 							userId={user?.id}
 						/>
@@ -95,14 +95,11 @@ export const PostCard = ({ post }: { post: Post }) => {
 							<MessageCircle className="h-4 w-4" />
 							{post.repliesCount}
 						</Button>
-						<Button
-							variant="ghost"
-							size="sm"
-							className="flex items-center gap-1 px-2"
-						>
-							<Repeat2 className="h-4 w-4" />
-							{post.repostsCount}
-						</Button>
+						<RepostButton
+							initialReposted={post.isReposted}
+							initialRepostsCount={post.repostsCount}
+							postId={post.id}
+						/>
 						<Button
 							variant="ghost"
 							size="sm"
