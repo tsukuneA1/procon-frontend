@@ -1,9 +1,29 @@
 import type { Post } from "@/types/post";
 
+export async function fetchTimeline(): Promise<Post[]> {
+	const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/posts`, {
+		cache: "no-store",
+		credentials: "include",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+		},
+	});
+
+	if (!res.ok) {
+		throw new Error(`Failed to fetch timeline: ${res.statusText}`);
+	}
+	return await res.json();
+}
+
 export async function fetchPostDetail(postId: string): Promise<Post> {
 	const res = await fetch(
 		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/posts/${postId}`,
 		{
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+			},
 			cache: "no-store",
 			credentials: "include",
 		},
@@ -80,6 +100,7 @@ export async function likePost({
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
 			},
 			credentials: "include",
 			body: JSON.stringify({
