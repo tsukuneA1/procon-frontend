@@ -5,7 +5,6 @@ import { PostCard } from "@/components/postCard";
 import { fetchTimeline } from "@/lib/api/post";
 import type { Post } from "@/types/post";
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 export function TimelineFetcher() {
 	const [posts, setPosts] = useState<Post[]>([]);
@@ -43,7 +42,7 @@ export function TimelineFetcher() {
 		<>
 			<NewPost />
 			{posts.map((post) => (
-				<PostCard key={uuidv4()} post={post} />
+				<PostCard key={post.id} post={post} />
 			))}
 		</>
 	);
