@@ -8,7 +8,10 @@ export type Notice = {
 		isFollowing: boolean;
 	};
 	postId: number;
-	postContent: string;
+	post: {
+		id: number;
+		content: string;
+	};
 	notifiableType: NotifiableType;
 	notifiableId: number;
 	createdAt: string;
