@@ -6,21 +6,21 @@ import { Heart } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 
-type LikeButtonProps = {
+type Props = {
 	initialLiked: boolean;
-	initialLikes: number;
+	initialLikesCount: number;
 	postId: number;
 	userId: number | undefined;
 };
 
 export const LikeButton = ({
 	initialLiked,
-	initialLikes,
+	initialLikesCount,
 	postId,
 	userId,
-}: LikeButtonProps) => {
+}: Props) => {
 	const [liked, setLiked] = useState(initialLiked);
-	const [likes, setLikes] = useState(initialLikes);
+	const [likes, setLikes] = useState(initialLikesCount);
 	const [isAnimating, setIsAnimating] = useState(false);
 
 	const handleLike = async () => {

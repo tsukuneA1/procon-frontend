@@ -15,4 +15,5 @@ export type PostDetail = {
 	repostsCount: number;
 	replies: PostDetail[];
 	isLiked: boolean;
+	isReposted: boolean;
 };
