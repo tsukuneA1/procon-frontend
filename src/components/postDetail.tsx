@@ -1,20 +1,44 @@
 "use client";
 
 import { useUser } from "@/app/context/user-context";
+import { fetchPostDetail } from "@/lib/api/post";
 import type { Post } from "@/types/post";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PostCard } from "./postCard";
 import { RepliedPostCard } from "./repliedPostCard";
 import ReplyForm from "./replyForm";
 import { ReplyPostCard } from "./replyPostCard";
 
-export const PostDetailComponent = ({ post }: { post: Post }) => {
+type Props = {
+	id: string;
+};
+
+export const PostDetailComponent = ({ id }: Props) => {
+	const [post, setPost] = useState<Post | null>(null);
 	const mainPostRef = useRef<HTMLDivElement | null>(null);
 	const { user } = useUser();
 
 	useEffect(() => {
-		mainPostRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
-	}, []);
+		const getPost = async () => {
+			try {
+				const fetchedPost = await fetchPostDetail(id);
+				setPost(fetchedPost);
+			} catch (error) {
+				console.error("Failed to fetch post:", error);
+			}
+		};
+
+		getPost();
+	}, [id]);
+
+	useEffect(() => {
+		if (post && mainPostRef.current) {
+			mainPostRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
+		}
+	}, [post]);
+
+	if (!post) return <div>Loading...</div>;
+
 	return (
 		<div className="min-h-screen flex flex-col">
 			{post.replyToId && <RepliedPostCard repliedPostId={post.replyToId} />}
