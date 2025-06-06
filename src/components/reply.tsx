@@ -3,10 +3,11 @@
 import { useUser } from "@/app/context/user-context";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { PostDetail } from "@/types/post_detail";
-import { MessageCircle, Repeat2 } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { pagesPath } from "../../utils/$path";
 import { LikeButton } from "./likeButton";
+import { RepostButton } from "./repostButton";
 import { Button } from "./ui/button";
 
 export const Reply = ({ reply }: { reply: PostDetail }) => {
@@ -32,7 +33,7 @@ export const Reply = ({ reply }: { reply: PostDetail }) => {
 					<div className="mt-3 flex gap-4 text-sm text-zinc-500">
 						<LikeButton
 							initialLiked={reply.isLiked}
-							initialLikes={reply.likesCount}
+							initialLikesCount={reply.likesCount}
 							postId={reply.id}
 							userId={user?.id}
 						/>
@@ -44,14 +45,11 @@ export const Reply = ({ reply }: { reply: PostDetail }) => {
 							<MessageCircle className="h-4 w-4" />
 							{reply.repliesCount}
 						</Button>
-						<Button
-							variant="ghost"
-							size="sm"
-							className="flex items-center gap-1 px-2"
-						>
-							<Repeat2 className="h-4 w-4" />
-							{reply.repostsCount}
-						</Button>
+						<RepostButton
+							initialReposted={reply.isReposted}
+							initialRepostsCount={reply.repostsCount}
+							postId={reply.id}
+						/>
 					</div>
 				</div>
 			</div>
