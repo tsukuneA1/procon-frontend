@@ -2,7 +2,7 @@
 name: Enhancement Request
 about: 機能追加リクエスト
 title: ''
-labels: ''
+labels: enhancement
 assignees: ''
 
 ---
