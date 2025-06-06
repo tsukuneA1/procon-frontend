@@ -1,10 +1,10 @@
 import { PostDetailComponent } from "@/components/postDetail";
 import { MainLayout } from "@/layouts/main/layout";
 
-export default async function Page({
+export default function Page({
 	params,
-}: { params: Promise<{ id: string }> }) {
-	const { id } = await params;
+}: { params: { id: string } }) {
+	const { id } = params;
 
 	return (
 		<MainLayout>
