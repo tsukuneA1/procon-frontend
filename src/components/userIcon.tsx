@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	Popover,
 	PopoverContent,
@@ -30,8 +32,8 @@ export const UserIcon = ({ iconInfo }: { iconInfo: UserIconInfo }) => {
 
 	if (iconInfo.isFollowing) {
 		return (
-			<Link href={`/users/${iconInfo.id}`}>
-				<Avatar className="top-2 border-1 border-gray-300">
+			<Link href={`/users/${iconInfo.id}`} className="inline-block">
+				<Avatar className="top-0.5 border-1 border-gray-300">
 					<AvatarImage src={iconInfo.image} />
 					<AvatarFallback>U</AvatarFallback>
 				</Avatar>
