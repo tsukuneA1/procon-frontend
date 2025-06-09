@@ -3,10 +3,10 @@
 import { useUser } from "@/app/context/user-context";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { pagesPath } from "@/lib/$path";
 import type { PostDetail } from "@/types/post_detail";
 import { MessageCircle } from "lucide-react";
 import Link from "next/link";
-import { pagesPath } from "../../../../utils/$path";
 import { LikeButton } from "../like/likeButton";
 import { RepostButton } from "../repost/repostButton";
 

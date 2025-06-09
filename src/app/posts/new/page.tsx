@@ -29,10 +29,10 @@ import { useState } from "react";
 
 import { useUser } from "@/app/context/user-context";
 import { visibilityOptions } from "@/constants/visibilityOptions";
+import { pagesPath } from "@/lib/$path";
 import { createPost } from "@/lib/api/post";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { pagesPath } from "../../../../utils/$path";
 
 const PostFormPage = () => {
 	const [content, setContent] = useState("");

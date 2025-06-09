@@ -16,10 +16,10 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
+import { pagesPath } from "@/lib/$path";
 import { getTimeDistance } from "@/lib/utils";
 import { MessageCircle, MoreHorizontal, Repeat2, Share } from "lucide-react";
 import Link from "next/link";
-import { pagesPath } from "../../../../utils/$path";
 import { LikeButton } from "../like/likeButton";
 import { UserIcon } from "../userIcon/userIcon";
 import { PostOptions } from "./postOptions";
