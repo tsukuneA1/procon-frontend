@@ -1,12 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { likePost } from "@/lib/api/post";
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { LIKE_ARIA_LABEL } from "./constants";
 
-type Props = {
+type LikeButtonProps = {
 	initialLiked: boolean;
 	initialLikesCount: number;
 	postId: number;
@@ -18,7 +19,7 @@ export const LikeButton = ({
 	initialLikesCount,
 	postId,
 	userId,
-}: Props) => {
+}: LikeButtonProps) => {
 	const [liked, setLiked] = useState(initialLiked);
 	const [likes, setLikes] = useState(initialLikesCount);
 	const [isAnimating, setIsAnimating] = useState(false);
@@ -37,6 +38,7 @@ export const LikeButton = ({
 			variant="ghost"
 			className="gap-1 rounded-full group"
 			onClick={handleLike}
+			aria-label={LIKE_ARIA_LABEL}
 		>
 			<Heart
 				className={cn(

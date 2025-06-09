@@ -1,14 +1,14 @@
-import { PostDetailComponent } from "@/components/postDetail";
+import { DetailPost } from "@/components/general/post/detailPost";
 import { MainLayout } from "@/layouts/main/layout";
 
-export default function Page({
-	params,
-}: { params: { id: string } }) {
+const PostIdPage = ({ params }: { params: { id: string } }) => {
 	const { id } = params;
 
 	return (
 		<MainLayout>
-			<PostDetailComponent id={id} />
+			<DetailPost id={id} />
 		</MainLayout>
 	);
-}
+};
+
+export default PostIdPage;

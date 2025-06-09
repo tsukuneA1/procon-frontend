@@ -1,10 +1,11 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { repost } from "@/lib/api/post";
 import { cn } from "@/lib/utils";
 import { Repeat2 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { REPOST_ARIA_LABEL } from "./constants";
 
 type Props = {
 	initialReposted: boolean;
@@ -35,6 +36,7 @@ export const RepostButton = ({
 			variant="ghost"
 			className="gap-1 rounded-full group"
 			onClick={handleRepost}
+			aria-label={REPOST_ARIA_LABEL}
 		>
 			<Repeat2
 				className={cn(
