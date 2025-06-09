@@ -1,13 +1,13 @@
 "use client";
 
 import { NewPost } from "@/app/posts/newPost";
-import { PostCard } from "@/components/postCard";
+import { Post } from "@/components/general/post/post";
 import { fetchTimeline } from "@/lib/api/post";
-import type { Post } from "@/types/post";
+import type { Post as PostType } from "@/types/post";
 import { useEffect, useState } from "react";
 
-export function TimelineFetcher() {
-	const [posts, setPosts] = useState<Post[]>([]);
+export const TimelineFetcher = () => {
+	const [posts, setPosts] = useState<PostType[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
@@ -42,8 +42,8 @@ export function TimelineFetcher() {
 		<>
 			<NewPost />
 			{posts.map((post) => (
-				<PostCard key={post.id} post={post} />
+				<Post key={post.id} post={post} />
 			))}
 		</>
 	);
-}
+};

@@ -2,19 +2,19 @@
 
 import { useUser } from "@/app/context/user-context";
 import { fetchPostDetail } from "@/lib/api/post";
-import type { Post } from "@/types/post";
+import type { Post as PostType } from "@/types/post";
 import { useEffect, useRef, useState } from "react";
-import { PostCard } from "./postCard";
-import { RepliedPostCard } from "./repliedPostCard";
-import ReplyForm from "./replyForm";
-import { ReplyPostCard } from "./replyPostCard";
+import { RepliedPostCard } from "../reply/repliedPostCard";
+import ReplyForm from "../reply/replyForm";
+import { ReplyPostCard } from "../reply/replyPostCard";
+import { Post } from "./post";
 
 type Props = {
 	id: string;
 };
 
-export const PostDetailComponent = ({ id }: Props) => {
-	const [post, setPost] = useState<Post | null>(null);
+export const DetailPost = ({ id }: Props) => {
+	const [post, setPost] = useState<PostType | null>(null);
 	const mainPostRef = useRef<HTMLDivElement | null>(null);
 	const { user } = useUser();
 
@@ -44,7 +44,7 @@ export const PostDetailComponent = ({ id }: Props) => {
 			{post.replyToId && <RepliedPostCard repliedPostId={post.replyToId} />}
 			<div className="max-w-2xl flex-1">
 				<div ref={mainPostRef} />
-				<PostCard post={post} />
+				<Post post={post} />
 
 				{post.repliesCount > 0 && (
 					<div className="mt-4">

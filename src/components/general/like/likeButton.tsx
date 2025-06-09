@@ -1,12 +1,12 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { likePost } from "@/lib/api/post";
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./ui/button";
 
-type Props = {
+type LikeButtonProps = {
 	initialLiked: boolean;
 	initialLikesCount: number;
 	postId: number;
@@ -18,7 +18,7 @@ export const LikeButton = ({
 	initialLikesCount,
 	postId,
 	userId,
-}: Props) => {
+}: LikeButtonProps) => {
 	const [liked, setLiked] = useState(initialLiked);
 	const [likes, setLikes] = useState(initialLikesCount);
 	const [isAnimating, setIsAnimating] = useState(false);

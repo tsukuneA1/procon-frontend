@@ -1,10 +1,12 @@
-import { TimelineFetcher } from "@/components/TimelineFetcher";
+import { TimelineFetcher } from "@/components/domain/timeline/timelineFetcher";
 import { MainLayout } from "@/layouts/main/layout";
 
-export default async function Home() {
+const Home = () => {
 	return (
 		<MainLayout>
 			<TimelineFetcher />
 		</MainLayout>
 	);
-}
+};
+
+export default Home;

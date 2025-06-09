@@ -1,10 +1,10 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { repost } from "@/lib/api/post";
 import { cn } from "@/lib/utils";
 import { Repeat2 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./ui/button";
 
 type Props = {
 	initialReposted: boolean;

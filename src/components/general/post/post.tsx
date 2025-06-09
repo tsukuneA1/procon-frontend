@@ -5,31 +5,26 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-import type { Post } from "@/types/post";
+import type { Post as PostType } from "@/types/post";
 
 import { useUser } from "@/app/context/user-context";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
-	Bookmark,
-	EyeOff,
-	Link2,
-	MessageCircle,
-	MessageSquareOff,
-	MoreHorizontal,
-	Share,
-	ShieldAlert,
-	UserRoundX,
-} from "lucide-react";
+	Drawer,
+	DrawerContent,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
+import { getTimeDistance } from "@/lib/utils";
+import { MessageCircle, MoreHorizontal, Repeat2, Share } from "lucide-react";
 import Link from "next/link";
-import { pagesPath } from "../../utils/$path";
-import { getTimeDistance } from "../lib/utils";
-import { LikeButton } from "./likeButton";
-import { RepostButton } from "./repostButton";
-import { Button } from "./ui/button";
-import { Card, CardContent, CardHeader } from "./ui/card";
-import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "./ui/drawer";
-import { UserIcon } from "./userIcon";
+import { pagesPath } from "../../../../utils/$path";
+import { LikeButton } from "../like/likeButton";
+import { UserIcon } from "../userIcon/userIcon";
+import { PostOptions } from "./postOptions";
 
-export const PostCard = ({ post }: { post: Post }) => {
+export const Post = ({ post }: { post: PostType }) => {
 	const { user } = useUser();
 
 	return (
@@ -95,11 +90,14 @@ export const PostCard = ({ post }: { post: Post }) => {
 							<MessageCircle className="h-4 w-4" />
 							{post.repliesCount}
 						</Button>
-						<RepostButton
-							initialReposted={post.isReposted}
-							initialRepostsCount={post.repostsCount}
-							postId={post.id}
-						/>
+						<Button
+							variant="ghost"
+							size="sm"
+							className="flex items-center gap-1 px-2"
+						>
+							<Repeat2 className="h-4 w-4" />
+							{post.repostsCount}
+						</Button>
 						<Button
 							variant="ghost"
 							size="sm"
@@ -111,50 +109,5 @@ export const PostCard = ({ post }: { post: Post }) => {
 				</div>
 			</div>
 		</Card>
-	);
-};
-
-const PostOptions = () => {
-	return (
-		<div>
-			<div className="m-1 flex flex-col divide-y rounded-md bg-white">
-				<Button variant="ghost" size="sm" className="flex justify-between">
-					<span>保存</span>
-					<Bookmark />
-				</Button>
-				<Button variant="ghost" size="sm" className="flex justify-between">
-					<span>興味なし</span>
-					<EyeOff />
-				</Button>
-			</div>
-			<div className="m-1 flex flex-col divide-y rounded-md bg-white">
-				<Button variant="ghost" size="sm" className="flex justify-between">
-					<span>リンクをコピー</span>
-					<Link2 />
-				</Button>
-			</div>
-			<div className="m-1 flex flex-col divide-y rounded-md bg-white">
-				<Button variant="ghost" size="sm" className="flex justify-between">
-					<span>ミュート</span>
-					<MessageSquareOff />
-				</Button>
-				<Button
-					variant="ghost"
-					size="sm"
-					className="flex justify-between text-red-500"
-				>
-					<span>ブロック</span>
-					<UserRoundX />
-				</Button>
-				<Button
-					variant="ghost"
-					size="sm"
-					className="flex justify-between text-red-500"
-				>
-					<span>報告する</span>
-					<ShieldAlert />
-				</Button>
-			</div>
-		</div>
 	);
 };
