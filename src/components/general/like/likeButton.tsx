@@ -5,6 +5,7 @@ import { likePost } from "@/lib/api/post";
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import { useState } from "react";
+import { LIKE_ARIA_LABEL } from "./constants";
 
 type LikeButtonProps = {
 	initialLiked: boolean;
@@ -37,6 +38,7 @@ export const LikeButton = ({
 			variant="ghost"
 			className="gap-1 rounded-full group"
 			onClick={handleLike}
+			aria-label={LIKE_ARIA_LABEL}
 		>
 			<Heart
 				className={cn(
