@@ -28,7 +28,7 @@ export default async function Page({ params }: Props) {
 	return (
 		<MainLayout>
 			{posts.map((post) => (
-				<Post key={uuidv4()} post={post} />
+				<Post key={post.id} post={post} />
 			))}
 		</MainLayout>
 	);
