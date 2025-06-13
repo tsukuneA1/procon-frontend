@@ -55,7 +55,6 @@ export default function ReplyForm({ user, replyToPost }: Props) {
 			await postReply({
 				content: content,
 				replyToId: replyToPost.id,
-				userId: user?.id,
 			});
 		};
 
