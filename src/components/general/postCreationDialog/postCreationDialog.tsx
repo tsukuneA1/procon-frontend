@@ -19,7 +19,10 @@ import {
 } from "@/components/ui/select";
 
 import { useUser } from "@/app/context/user-context";
-import { visibilityOptions } from "@/constants/visibilityOptions";
+import {
+	visibilityOptions,
+	visibilityTextMap,
+} from "@/constants/visibilityOptions";
 import { fetchPostDetail, quotePost } from "@/lib/api/post";
 import { Post } from "@/types/post";
 import {
@@ -39,6 +42,7 @@ export const PostCreationDialog = () => {
 	const [content, setContent] = useState("");
 	const [quotedPost, setQuotedPost] = useState<Post | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [visibilityOption, setVisibilityOption] = useState(
 		visibilityOptions[0],
 	);
@@ -52,6 +56,7 @@ export const PostCreationDialog = () => {
 	useEffect(() => {
 		if (quoteId) {
 			setIsLoading(true);
+
 			fetchPostDetail(quoteId)
 				.then(setQuotedPost)
 				.catch(console.error)
@@ -60,30 +65,35 @@ export const PostCreationDialog = () => {
 	}, [quoteId]);
 
 	const handleClose = () => {
-		router.back();
+		setTimeout(() => {
+			router.back();
+		}, 1000);
 	};
 
-	const handleSubmit = async () => {
-		const postData = async () => {
-			await quotePost({
-				content,
-				quotedPostId: quotedPost!.id,
-			});
-		};
+	const handleSubmit = () => {
+		if (!quotedPost) {
+			toast.error("引用する投稿が見つかりません。");
+			return;
+		}
 
-		toast.promise(postData(), {
-			loading: "投稿中...",
-			success: () => {
-				setContent("");
-				handleClose();
-				router.refresh();
-				setTimeout(() => {
-					router.push("/");
-				}, 1000);
-				return "投稿しました！";
+		setIsSubmitting(true);
+		toast.promise(
+			quotePost({
+				content,
+				quotedPostId: quotedPost.id,
+			}),
+			{
+				loading: "投稿中...",
+				success: () => {
+					setContent("");
+					handleClose();
+					router.refresh();
+					return "投稿しました！";
+				},
+				error: "投稿に失敗しました...",
+				finally: () => setIsSubmitting(false),
 			},
-			error: "投稿に失敗しました...",
-		});
+		);
 	};
 
 	return (
@@ -147,17 +157,7 @@ export const PostCreationDialog = () => {
 								<SelectTrigger className="w-auto border-none shadow-none cursor-pointer">
 									<SelectValue>
 										<div className="flex items-center gap-2">
-											{visibilityOption === visibilityOptions[0] ? (
-												<div>フォロワーは返信・引用できます</div>
-											) : visibilityOption === visibilityOptions[1] ? (
-												<div className="flex items-center gap-2">
-													フォロー中のユーザーは返信・引用できます
-												</div>
-											) : (
-												<div className="flex items-center gap-2">
-													メンションしたユーザーのみは返信・引用できます
-												</div>
-											)}
+											{visibilityTextMap[visibilityOption] || ""}
 										</div>
 									</SelectValue>
 								</SelectTrigger>
@@ -177,7 +177,7 @@ export const PostCreationDialog = () => {
 									handleSubmit();
 								}}
 								className="rounded-3xl"
-								disabled={!content}
+								disabled={!content || isSubmitting}
 							>
 								投稿
 							</Button>

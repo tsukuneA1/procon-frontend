@@ -30,13 +30,13 @@ export const RepostButton = ({
 	const [isAnimating, setIsAnimating] = useState(false);
 	const [popoverOpen, setPopoverOpen] = useState(false);
 
-	const handleRepost = () => {
+	const handleRepost = async () => {
 		setReposted(!reposted);
 		setReposts((prev) => (reposted ? prev - 1 : prev + 1));
 
 		setIsAnimating(true);
 		setTimeout(() => setIsAnimating(false), 500);
-		repost({ postId: postId });
+		await repost({ postId: postId });
 	};
 
 	return (
