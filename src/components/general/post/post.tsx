@@ -87,7 +87,6 @@ export const Post = ({ post }: { post: PostType }) => {
 							{post.content}
 							{post.quotedPost && <QuotedPostCard {...post.quotedPost} />}
 						</CardContent>
-
 						<div className="mt-3 flex gap-4 text-sm text-zinc-500">
 							<div onClick={stopPropagation}>
 								<LikeButton

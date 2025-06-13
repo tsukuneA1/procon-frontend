@@ -1,7 +1,6 @@
 import { Post } from "@/components/general/post/post";
 import { MainLayout } from "@/layouts/main/layout";
 import type { Post as PostType } from "@/types/post";
-import { v4 as uuidv4 } from "uuid";
 
 type UserPageProps = {
 	params: {
@@ -28,7 +27,7 @@ const UserPage = async ({ params }: UserPageProps) => {
 	return (
 		<MainLayout>
 			{posts.map((post) => (
-				<Post key={uuidv4()} post={post} />
+				<Post key={post.id} post={post} />
 			))}
 		</MainLayout>
 	);
