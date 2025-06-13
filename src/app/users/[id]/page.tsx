@@ -3,13 +3,11 @@ import { MainLayout } from "@/layouts/main/layout";
 import type { Post as PostType } from "@/types/post";
 
 type UserPageProps = {
-	params: {
-		id: string;
-	};
+	params: Promise<{ userId: string }>;
 };
 
 const UserPage = async ({ params }: UserPageProps) => {
-	const userId = params.id;
+	const { userId } = await params;
 
 	const userPostsRes = await fetch(
 		`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/posts/user/${userId}`,
