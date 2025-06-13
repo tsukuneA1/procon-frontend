@@ -45,7 +45,7 @@ const PostFormPage = () => {
 
 	const handleSubmit = async () => {
 		const postData = async () => {
-			await createPost(content, user?.id);
+			await createPost(content);
 		};
 
 		toast.promise(postData(), {

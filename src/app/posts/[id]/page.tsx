@@ -1,8 +1,8 @@
 import { DetailPost } from "@/components/general/post/detailPost";
 import { MainLayout } from "@/layouts/main/layout";
 
-const PostIdPage = ({ params }: { params: { id: string } }) => {
-	const { id } = params;
+const PostIdPage = async ({ params }: { params: { id: string } }) => {
+	const { id } = await params;
 
 	return (
 		<MainLayout>
