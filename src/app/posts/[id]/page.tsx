@@ -2,15 +2,15 @@ import { DetailPost } from "@/components/general/post/detailPost";
 import { MainLayout } from "@/layouts/main/layout";
 
 type PostPageProps = {
-	params: Promise<{ postId: string }>;
+	params: Promise<{ id: string }>;
 };
 
 const PostPage = async ({ params }: PostPageProps) => {
-	const { postId } = await params;
+	const { id } = await params;
 
 	return (
 		<MainLayout>
-			<DetailPost id={postId} />
+			<DetailPost id={id} />
 		</MainLayout>
 	);
 };
