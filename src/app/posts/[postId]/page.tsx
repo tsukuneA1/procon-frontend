@@ -5,7 +5,7 @@ type PostPageProps = {
 	params: Promise<{ postId: string }>;
 };
 
-const PostIdPage = async ({ params }: PostPageProps) => {
+const PostPage = async ({ params }: PostPageProps) => {
 	const { postId } = await params;
 
 	return (
@@ -15,4 +15,4 @@ const PostIdPage = async ({ params }: PostPageProps) => {
 	);
 };
 
-export default PostIdPage;
+export default PostPage;
