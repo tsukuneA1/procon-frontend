@@ -6,7 +6,7 @@ type UserPageProps = {
 	params: Promise<{ userId: string }>;
 };
 
-export default async function Page({ params }: UserPageProps) {
+const UserPage = async ({ params }: UserPageProps) => {
 	const { userId } = await params;
 
 	const userPostsRes = await fetch(
@@ -30,3 +30,5 @@ export default async function Page({ params }: UserPageProps) {
 		</MainLayout>
 	);
 }
+
+export default UserPage;
